@@ -20,15 +20,15 @@ class CreateStoriesTable extends Migration
             $table->timestamps();
 
             $table->unsignedInteger('visual_novel_id');
-            $table->unsignedInteger('character_id');
+            $table->unsignedInteger('character_image_id');
             $table->unsignedInteger('background_id');
             $table->unsignedInteger('music_id');
 
             $table->foreign('visual_novel_id')
                 ->references('id')->on('visual_novels')
                 ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('character_id')
-                ->references('id')->on('characters')
+            $table->foreign('character_image_id')
+                ->references('id')->on('characters_images')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('background_id')
                 ->references('id')->on('backgrounds')
