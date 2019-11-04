@@ -14,7 +14,11 @@ class CreateCharactersTable extends Migration
     public function up()
     {
         Schema::create('characters', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('fullname');
+            $table->string('nickname')->nullable();
+            $table->string('gender')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

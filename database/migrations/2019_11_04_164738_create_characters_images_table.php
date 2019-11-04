@@ -14,8 +14,15 @@ class CreateCharactersImagesTable extends Migration
     public function up()
     {
         Schema::create('characters_images', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('image');
             $table->timestamps();
+
+            $table->unsignedInteger('character_id');
+
+            $table->foreign('character_id')
+                ->references('id')->on('characters')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -14,8 +14,19 @@ class CreateCharacterVisualNovelTable extends Migration
     public function up()
     {
         Schema::create('character_visual_novel', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedInteger('visual_novel_id');
+            $table->unsignedInteger('character_id');
+            $table->unsignedInteger('character_role_id');
+
+            $table->foreign('visual_novel_id')
+                ->references('id')->on('visual_novels')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('character_id')
+                ->references('id')->on('characters')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('character_role_id')
+                ->references('id')->on('character_roles')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

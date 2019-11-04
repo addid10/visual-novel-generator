@@ -14,8 +14,15 @@ class CreateGenreVisualNovelTable extends Migration
     public function up()
     {
         Schema::create('genre_visual_novel', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedInteger('visual_novel_id');
+            $table->unsignedInteger('genre_id');
+
+            $table->foreign('visual_novel_id')
+                ->references('id')->on('visual_novels')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('genre_id')
+                ->references('id')->on('genres')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

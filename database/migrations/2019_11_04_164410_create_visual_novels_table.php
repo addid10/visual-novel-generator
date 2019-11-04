@@ -14,8 +14,16 @@ class CreateVisualNovelsTable extends Migration
     public function up()
     {
         Schema::create('visual_novels', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('title');
+            $table->longText('synopsis')->nullable();
             $table->timestamps();
+
+            $table->unsignedInteger('creator_id');
+            
+            $table->foreign('creator_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -14,8 +14,15 @@ class CreateMusicVisualNovelTable extends Migration
     public function up()
     {
         Schema::create('music_visual_novel', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedInteger('visual_novel_id');
+            $table->unsignedInteger('music_id');
+
+            $table->foreign('visual_novel_id')
+                ->references('id')->on('visual_novels')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('music_id')
+                ->references('id')->on('musics')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
