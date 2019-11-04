@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="character-form">
+            <form id="character-form" enctype="multipart/form-data" >
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="fullname">Fullname</label>
@@ -26,9 +26,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Description</label>
+                        <label for="description">Description</label>
                         <textarea id="description" class="form-control" name="description" rows="4"></textarea>
                     </div>
+                    <div class="form-group">
+                            <label for="images">Images</label>
+                            <input type="file" class="form-control-file" id="images" name="image[]" multiple>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

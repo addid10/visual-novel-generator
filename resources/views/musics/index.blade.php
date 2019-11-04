@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Characters')
+@section('title', 'Musics')
 
 @section('content')
 <div class="row">
@@ -8,33 +8,29 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-gradient-primary btn-rounded mb-3" id="visual-novel-add"
-                        data-toggle="modal" data-target="#visual-novel-modal">Add</button>
+                    <button type="submit" class="btn btn-gradient-primary btn-rounded mb-3" id="music-add"
+                        data-toggle="modal" data-target="#music-modal">Add</button>
                 </div>
-                <h4 class="card-title">Visual Novels</h4>
+                <h4 class="card-title">Musics</h4>
                 <div class="table-responsive">
-                    <table class="table" id="visual-novel-table">
+                    <table class="table" id="music-table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Creator</th>
-                                <th colspan="3">Assets</th>
+                                <th>Name</th>
+                                <th>Music</th>
                                 <th colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>GSA Visual Novel</td>
+                                <td>School-OST</td>
                                 <td>
-                                    <div class="nav-profile-img">
-                                        <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
-                                    </div>
+                                    <button class="btn btn-icon btn-gradient-danger btn-rounded"><span
+                                            class="mdi mdi-play-circle"></span></button>
                                 </td>
-                                <td>Rerezditya</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-warning"
-                                        id="visualNovelAdd">Update</button>
+                                    <button type="button" class="btn btn-sm btn-gradient-warning update">
+                                        Update</button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-gradient-danger delete">
@@ -52,9 +48,9 @@
 @endsection
 
 @section('modal')
-@include('modals.visual_novels.add');
+@include('modals.musics.add');
 @endsection
 
 @section('javascript')
-<script src="{{ asset('js/visual_novel/visual_novel.js') }}"></script>
+<script src="{{ asset('js/music/music.js') }}"></script>
 @endsection

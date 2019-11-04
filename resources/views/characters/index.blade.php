@@ -19,7 +19,7 @@
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Sex</th>
-                                <th colspan="2">Action</th>
+                                <th colspan="3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +31,10 @@
                                     </div>
                                 </td>
                                 <td>Male</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-gradient-info images">
+                                        Images</button>
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-gradient-warning update">
                                         Update</button>

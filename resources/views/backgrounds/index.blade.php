@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Characters')
+@section('title', 'Backgrounds')
 
 @section('content')
 <div class="row">
@@ -8,33 +8,30 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-gradient-primary btn-rounded mb-3" id="visual-novel-add"
-                        data-toggle="modal" data-target="#visual-novel-modal">Add</button>
+                    <button type="submit" class="btn btn-gradient-primary btn-rounded mb-3" id="background-add"
+                        data-toggle="modal" data-target="#background-modal">Add</button>
                 </div>
-                <h4 class="card-title">Visual Novels</h4>
+                <h4 class="card-title">Backgrounds</h4>
                 <div class="table-responsive">
-                    <table class="table" id="visual-novel-table">
+                    <table class="table" id="background-table">
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Name</th>
                                 <th>Image</th>
-                                <th>Creator</th>
-                                <th colspan="3">Assets</th>
                                 <th colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>GSA Visual Novel</td>
+                                <td>BG-School</td>
                                 <td>
-                                    <div class="nav-profile-img">
-                                        <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
+                                    <div class="bg-image-sm">
+                                        <img src="{{ asset('bg/01.jpg') }}" alt="image">
                                     </div>
                                 </td>
-                                <td>Rerezditya</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-warning"
-                                        id="visualNovelAdd">Update</button>
+                                    <button type="button" class="btn btn-sm btn-gradient-warning update">
+                                        Update</button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-gradient-danger delete">
@@ -52,9 +49,9 @@
 @endsection
 
 @section('modal')
-@include('modals.visual_novels.add');
+@include('modals.backgrounds.add');
 @endsection
 
 @section('javascript')
-<script src="{{ asset('js/visual_novel/visual_novel.js') }}"></script>
+<script src="{{ asset('js/background/background.js') }}"></script>
 @endsection
