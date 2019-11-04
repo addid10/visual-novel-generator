@@ -15,7 +15,6 @@ Route::view('/', 'index')->name('dashboard.index');
 
 Route::view('/visual_novels', 'visual_novels.index')->name('visual_novels.index');
 
-Route::view('/stories', 'stories.index')->name('stories.index');
 Route::view('/lists', 'stories.list')->name('stories.list');
 
 Route::prefix('assets')->group(function () {
@@ -26,3 +25,12 @@ Route::prefix('assets')->group(function () {
 
     Route::view('/musics', 'musics.index')->name('musics.index');   
 });
+
+Route::prefix('stories')->group(function () {
+    Route::view('/', 'stories.index')->name('stories.index');
+    Route::view('/menu', 'stories.menu')->name('stories.menu');
+    Route::view('/play', 'stories.play')->name('stories.play');
+    
+});
+
+Route::view('/login', 'users.login')->name('login.index');
