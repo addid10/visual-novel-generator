@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::view('/', 'index')->name('dashboard.index');
+
+Route::view('/visual_novels', 'visual_novels.index')->name('visual_novels.index');
+
+Route::view('/stories', 'stories.list')->name('stories.index');
+
+Route::prefix('assets')->group(function () {
+    
+    Route::view('/characters', 'characters.index')->name('characters.index');
+
+    Route::view('/backgrounds', 'backgrounds.index')->name('backgrounds.index');
+
+    Route::view('/musics', 'musics.index')->name('musics.index');   
 });
