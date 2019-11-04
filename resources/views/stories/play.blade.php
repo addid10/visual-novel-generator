@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <section class="background" style="background-image: url({{ asset('backgrounds/01.jpg') }})">
+    <section class="background" style="background-image: url({{ asset('storages/backgrounds/01.jpg') }})">
         <div class="d-flex justify-content-end">
             <nav class="visual-novel-menu">
                 <ul>
@@ -33,7 +33,7 @@
         <div class="character row ml-0 mr-0">
             <div id="" class="col-6 mx-auto">
                 <img class="animated fadeIn delay-2s mx-auto character-faceclaim"
-                    src="{{ asset('characters/Fendy.png') }}">
+                    src="{{ asset('storages/characters/Fendy.png') }}">
             </div>
         </div>
         <div class="row box">
