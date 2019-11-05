@@ -20,8 +20,8 @@
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item {{ Request::is('lists*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('stories.list') }}">
+        <li class="nav-item {{ Request::is('game*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('game.index') }}">
                 <span class="menu-title">List of Visual Novels</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
