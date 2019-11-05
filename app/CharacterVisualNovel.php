@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CharacterVisualNovel extends Model
+class CharacterVisualNovel extends Pivot
 {
-    //
+    protected $table = 'character_visual_novel';
+
+    public $timestamps = false;
 }

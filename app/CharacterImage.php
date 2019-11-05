@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class CharacterImage extends Model
 {
-    //
+    protected $table = 'characters_images';
+
+    public function characters()
+    {
+        return $this->belongsTo('App\Character');
+    }
+
+    public function stories()
+    {
+        return $this->hasMany('App\Story');
+    }
 }
