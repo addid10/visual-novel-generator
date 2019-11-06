@@ -8,14 +8,11 @@
                 </button>
             </div>
             <form id="visual-novel-form" method="POST">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Title</label>
                         <input type="text" id="title" class="form-control form-control-sm" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Creator(s)</label>
-                        <input type="text" id="creator" class="form-control form-control-sm" name="creator" required>
                     </div>
                     <div class="form-group">
                         <label for="">Synopsis</label>
@@ -24,13 +21,15 @@
 
                     <div class="form-group mt-3">
                         <label for="topics">Genres</label>
-                        <select multiple class="form-control form-control-sm" id="genres" name="genres[]" required>
+                        <select multiple class="form-control form-control-sm" id="genres" name="genres[]">
+                           
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="visual-novel-id">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="visual-novel-action">Save</button>
+                    <button type="submit" class="btn btn-primary" id="visual-novel-action">Save</button>
                 </div>
             </form>
         </div>
