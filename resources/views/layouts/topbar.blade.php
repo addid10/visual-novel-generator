@@ -13,16 +13,19 @@
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
                     <div class="nav-profile-img">
-                        <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
+                        <img src="{{ Auth::user()->image_profile }}" alt="image">
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
-                        <p class="mb-1 text-black">David Greymaax</p>
+                        <p class="mb-1 text-black">{{ Auth::user()->user_name }}</p>
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                            <button type="submit" class="dropdown-item" href="">
+                                <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button>
+                    </form>
                 </div>
             </li>
         </ul>

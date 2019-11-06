@@ -9,7 +9,7 @@
         <span class="d-flex align-items-center purchase-popup">
             <p>You have logged in as an </p>
                 <a
-                    class="btn purchase-button ml-2">admin</a>
+                    class="btn purchase-button ml-2">{{ Auth::user()->role->name }} </a>
         </span>
     </div>
 </div>
