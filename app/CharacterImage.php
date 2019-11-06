@@ -8,7 +8,7 @@ class CharacterImage extends Model
 {
     protected $table = 'characters_images';
 
-    public function characters()
+    public function character()
     {
         return $this->belongsTo('App\Character');
     }

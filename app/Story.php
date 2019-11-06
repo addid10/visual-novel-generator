@@ -11,22 +11,22 @@ class Story extends Model
         return $this->hasMany('App\SaveData');
     }
 
-    public function backgrounds()
+    public function background()
     {
         return $this->belongsTo('App\Background');
     }
 
-    public function musics()
+    public function music()
     {
         return $this->belongsTo('App\Music');
     }
 
-    public function characters_images()
+    public function characters_image()
     {
         return $this->belongsTo('App\CharacterImage');
     }
 
-    public function visual_novels()
+    public function visual_novel()
     {
         return $this->belongsTo('App\VisualNovel');
     }

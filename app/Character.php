@@ -16,8 +16,8 @@ class Character extends Model
         );
     }
     
-    public function stories()
+    public function characters_images()
     {
-        return $this->hasMany('App\Story');
+        return $this->hasMany('App\CharacterImage');
     }
 }
