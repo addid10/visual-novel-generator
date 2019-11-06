@@ -11,10 +11,14 @@
 |
 */
 Route::group([ 'middleware' => ['auth','role:creator']], function () {
+
+    // Route::get('/creators', 'UserController@index');
+    Route::get('/genres', 'GenreController@index');
     
     Route::prefix('visual_novels')->group(function () {
         Route::get('/', 'VisualNovelController@index')->name('visual_novels.index');
         Route::get('/to-json', 'VisualNovelController@toJson');
+        Route::post('/', 'VisualNovelController@store')->name('visual_novels.store');
     });
 
     Route::view('/stories', 'stories.index')->name('stories.index');
