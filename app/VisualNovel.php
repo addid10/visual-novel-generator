@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisualNovel extends Model
 {
+    public function genres()
+    {
+        return $this->belongsToMany(
+            'App\Genre', 
+            'genre_visual_novel', 
+            'visual_novel_id', 
+            'genre_id'
+        );
+    }
+    
     public function stories()
     {
         return $this->hasMany('App\Story');
@@ -39,5 +49,10 @@ class VisualNovel extends Model
             'visual_novel_id', 
             'character_id'
         );
+    }
+
+    public function users()
+    {
+        return $this->belongsTo('App\User');
     }
 }
