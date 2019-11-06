@@ -15,9 +15,7 @@
                         {{ $genre->name }}, 
                     @endforeach
                 </small>
-                <form class="mt-3" action="#" method="POST">
-                    <button type="submit" class="btn btn-rounded btn-block btn-gradient-primary btn-lg font-weight-medium">Play</button>
-                </form>
+                <a href="{{ route('game.menu', ['id' => $game->id]) }}" class="mt-3 btn btn-rounded btn-block btn-gradient-primary btn-lg font-weight-medium">Play</a>
             </div>
         </div>
     </div>
