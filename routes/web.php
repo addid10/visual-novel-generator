@@ -19,6 +19,9 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::get('/', 'VisualNovelController@index')->name('visual_novels.index');
         Route::get('/to-json', 'VisualNovelController@toJson');
         Route::post('/', 'VisualNovelController@store')->name('visual_novels.store');
+        Route::put('/{visual_novel}', 'VisualNovelController@update')->name('visual_novels.update');
+        Route::delete('/{visual_novel}', 'VisualNovelController@destroy')->name('visual_novels.destroy');
+        Route::get('/{visual_novel}/edit', 'VisualNovelController@edit')->name('visual_novels.edit');
     });
 
     Route::view('/stories', 'stories.index')->name('stories.index');
@@ -37,7 +40,7 @@ Route::group([ 'middleware' => ['auth','role:creator&guest star']], function () 
 
     Route::prefix('game')->group(function () {
         Route::get('/', 'GameController@index')->name('game.index');
-        Route::get('{id}/menu', 'GameController@menu')->name('game.menu');
+        Route::get('{game}/menu', 'GameController@menu')->name('game.menu');
         // Route::get('/play', 'games.play')->name('game.play');
         
     });
