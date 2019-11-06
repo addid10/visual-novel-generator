@@ -15,3 +15,18 @@
     object-fit: cover;
     object-position: center;
 }
+
+table.dataTable {
+    width: 98% !important;
+}
+
+table.dataTable td,
+table.dataTable th {
+    white-space: normal;
+}
+
+.page-item.active .page-link {
+    background-image: -moz-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
+    background-image: -webkit-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
+    background-image: -ms-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
+}
