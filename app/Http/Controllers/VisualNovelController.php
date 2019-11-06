@@ -18,10 +18,10 @@ class VisualNovelController extends Controller
 
     public function toJson()
     {
-        $visual_novels = VisualNovel::with('user')->get();
+        $visualNovel = VisualNovel::with('user')->get();
 
         return response()->json([
-            'data' => $visual_novels
+            'data' => $visualNovel
         ]);
     }
 
@@ -35,7 +35,7 @@ class VisualNovelController extends Controller
 
             if($validator->fails()) {
                 return response()->json([
-                    'error' => $validator->errors()
+                    'error' => "The title has already been taken!"
                 ]);
             }
 
@@ -53,28 +53,44 @@ class VisualNovelController extends Controller
        
         } catch (\Throwable $th) {
             return response()->json([
-                'error' => $th
+                'error' => "Failed data execution!"
             ]);
         }
 
     }
     
+    public function edit($id)
+    {
+        $visualNovel = VisualNovel::with('genres')->findOrFail($id);
+
+        return response()->json($visualNovel);
+    }
+
     
     public function update(Request $request, $id)
     {
-        $visualNovel = VisualNovel::findOrFail($id);
+        try {
+            $visualNovel = VisualNovel::findOrFail($id);
 
-        $visualNovel->update($request->all())
-        ->genres()->sync($request->topics);
+            $visualNovel->update([
+                'title' => $request->title,
+                'synopsis' => $request->synopsis
+            ]);
+
+            $visualNovel->genres()->sync($request->genres);
+            
+            return response()->json([
+                'success' => "Data updated successfully!"
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => "Failed data execution!",
+                'message' => $th
+            ]);
+        }
     }
 
 
-
-    public function destroy($id)
-    {
-        $visualNovel = VisualNovel::findOrFail($id);
-
-        $visualNovel->forceDelete();
-    }
 
 }
