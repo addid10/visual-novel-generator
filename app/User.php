@@ -33,10 +33,26 @@ class User extends Authenticatable
         return $this->hasOne('App\SaveData');
     }
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo('App\Role');
     }
 
+    public function visual_novels()
+    {
+        return $this->hasMany('App\VisualNovel');
+    }
 
+    public function hasRole($roleNames)
+    {
+        $roles = explode("&", $roleNames);
+
+        foreach ($roles as $roleName) {
+            if ($this->role->name === $roleName) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
