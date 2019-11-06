@@ -1,3 +1,127 @@
+// DataTable
+let dataTable = $('#visual-novel-table').DataTable({
+    "processing": true,
+    "ajax": {
+        url: "visual_novels/to-json"
+    },
+    "columns": [{
+            data: 'title'
+        },
+        {
+            data: 'user.name'
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return '<button id="' + buttonId + '" class="d-block btn btn-sm btn-gradient-primary characters">Characters</button>' +
+                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary characters">Backgrounds</button>' +
+                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary characters">Musics</button>';
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return '<button id="' + buttonId + '" class="btn btn-sm btn-gradient-warning update">Update</button>';
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return '<button id="' + buttonId + '" class="btn btn-sm btn-gradient-danger delete">Delete</button>';
+            }
+        }
+    ]
+});
+
+// When pressing the add button. 
+$('#visual-novel-add').click(function () {
+    $('#visual-novel-form')[0].reset();
+    $('#visual-novel-title').text("Add visual novel data");
+    $('#visual-novel-action').text("Add");
+});
+
+// Calling all genre data! 
+$(document).ready(function () {
+    $.ajax({
+        url: 'genres',
+        type: "GET",
+        dataType: "json",
+        success: function (genres) {
+            genres.data.forEach(function (result) {
+                let genre = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#genres').append(genre);
+            })
+
+        }
+    })
+});
+
+
+// Add & Update 
+$(document).on('submit', '#visual-novel-form', function (e) {
+    e.preventDefault();
+
+    //Variables
+    let action = $('#visual-novel-action').text();
+    let id = $('#visual-novel-id').val();
+    let url;
+
+    let formData = new FormData(this);
+
+    if (action == "Add") {
+        url = "visual_novels"
+    } else if (action == "Update") {
+        url = "visual_novels/" + id
+        formData.append("_method", "PUT");
+    }
+
+    if (url !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 2000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('#visual-novel-form')[0].reset();
+
+                if (data.error == undefined) {
+                    Swal.fire({
+                            type: 'success',
+                            title: data.success,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#visual-novel-modal').modal('hide');
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: data.error.title[0],
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
+});
+
+
+// Force delete!
 $('#visual-novel-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
 
