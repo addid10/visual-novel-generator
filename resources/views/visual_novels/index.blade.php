@@ -1,5 +1,9 @@
 @extends('layouts.template')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/vendors/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+@endsection
+
 @section('title', 'Visual Novels')
 
 @section('content')
@@ -13,41 +17,20 @@
                 </div>
                 <h4 class="card-title">Visual Novels</h4>
                 <div class="table-responsive">
-                    <table class="table" id="visual-novel-table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Creator</th>
-                                <th colspan="3">Assets</th>
-                                <th colspan="2">Action</th>
-                            </tr>
-                        </thead>
+                        <table class="table" id="visual-novel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Creator</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
                         <tbody>
-                            <tr>
-                                <td>GSA Visual Novel</td>
-                                <td>Rerezditya</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-primary" data-toggle="modal"
-                                        data-target="#visual-novel-characters-modal">Characters</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-primary"
-                                        id="visualNovelAdd">Backgrounds</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-primary"
-                                        id="visualNovelAdd">Musics</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-warning"
-                                        id="visualNovelAdd">Update</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-danger delete">
-                                        Delete</button>
-                                </td>
-                            </tr>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -58,12 +41,18 @@
 @endsection
 
 @section('modal')
-    @include('modals.visual_novels.add');
-    @include('modals.visual_novels.character');
-    @include('modals.visual_novels.background');
-    @include('modals.visual_novels.music');
+@include('modals.visual_novels.add');
+@include('modals.visual_novels.character');
+@include('modals.visual_novels.background');
+@include('modals.visual_novels.music');
 @endsection
 
 @section('javascript')
+{{-- Datatable  --}}
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
+</script>
+
+{{-- Custom Javascript --}}
 <script src="{{ asset('js/visual_novel/visual_novel.js') }}"></script>
 @endsection
