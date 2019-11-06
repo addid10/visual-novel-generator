@@ -296,6 +296,12 @@ img {
     background: #ae1414;
 }
 
+.game-menu label a,
+.game-menu label a:hover {
+    color: #f1f1f1;
+}
+
+
 nav h1 {
     margin: 0 0 20px 0;
 }
