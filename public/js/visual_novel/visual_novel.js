@@ -39,7 +39,7 @@ let dataTable = $('#visual-novel-table').DataTable({
 // When pressing the add button. 
 $('#visual-novel-add').click(function () {
     $('#visual-novel-form')[0].reset();
-    $('#visual-novel-title').text("Add visual novel data");
+    $('#visual-novel-title').text("Add visual novel datas");
     $('#visual-novel-action').text("Add");
 });
 
@@ -59,6 +59,33 @@ $(document).ready(function () {
     })
 });
 
+//Fetch/show datas for update
+$('#visual-novel-table tbody').on('click', '.update', function () {
+    let id = $(this).attr('id');
+    let genres = [];
+
+    $.ajax({
+        url: "visual_novels/" + id + "/edit",
+        dataType: "json",
+        success: function (result) {
+            console.log(result)
+            $('#visual-novel-modal').modal('show');
+            $('#visual-novel-title').text("Update visual novel datas");
+            $('#visual-novel-action').text("Update");
+
+
+            result.genres.forEach(function (genre) {
+                genres.push(genre.id);
+            })
+
+            $('#visual-novel-id').val(result.id);
+            $('#title').val(result.title);
+            $('#synopsis').val(result.synopsis);
+            $('#genres').val(genres);
+
+        }
+    })
+});
 
 // Add & Update 
 $(document).on('submit', '#visual-novel-form', function (e) {
@@ -110,7 +137,7 @@ $(document).on('submit', '#visual-novel-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: data.error.title[0],
+                        title: data.error,
                         showConfirmButton: false,
                         timer: 1500
                     })
