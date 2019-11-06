@@ -21,9 +21,9 @@ class Story extends Model
         return $this->belongsTo('App\Music');
     }
 
-    public function characters()
+    public function characters_images()
     {
-        return $this->belongsTo('App\Character');
+        return $this->belongsTo('App\CharacterImage');
     }
 
     public function visual_novels()
