@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCharacterVisualNovelTable extends Migration
+class CreateVisualNovelsCharactersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class CreateCharacterVisualNovelTable extends Migration
      */
     public function up()
     {
-        Schema::create('character_visual_novel', function (Blueprint $table) {
+        Schema::create('visual_novels_characters', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('visual_novel_id');
             $table->unsignedInteger('character_id');
             $table->unsignedInteger('character_role_id');
@@ -37,6 +38,6 @@ class CreateCharacterVisualNovelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('character_visual_novel');
+        Schema::dropIfExists('visual_novels_characters');
     }
 }
