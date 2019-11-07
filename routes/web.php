@@ -22,6 +22,9 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::put('/{visual_novel}', 'VisualNovelController@update')->name('visual_novels.update');
         Route::delete('/{visual_novel}', 'VisualNovelController@destroy')->name('visual_novels.destroy');
         Route::get('/{visual_novel}/edit', 'VisualNovelController@edit')->name('visual_novels.edit');
+
+        
+        Route::get('/{visual_novel}/characters', 'VisualNovelCharacterController@show')->name('visual_novel_characters.show');
     });
 
     Route::view('/stories', 'stories.index')->name('stories.index');

@@ -1,3 +1,10 @@
+// CSRF 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 // DataTable
 let dataTable = $('#visual-novel-table').DataTable({
     "processing": true,
@@ -15,8 +22,8 @@ let dataTable = $('#visual-novel-table').DataTable({
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
                 return '<button id="' + buttonId + '" class="d-block btn btn-sm btn-gradient-primary characters">Characters</button>' +
-                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary characters">Backgrounds</button>' +
-                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary characters">Musics</button>';
+                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary backgrounds">Backgrounds</button>' +
+                    '<button id="' + buttonId + '" class="d-block mt-1 btn btn-sm btn-gradient-primary musics">Musics</button>';
             }
         },
         {
@@ -162,20 +169,20 @@ $('#visual-novel-table tbody').on('click', '.delete', function () {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            // $.ajax({
-            //     url: "lecturers/" + id,
-            //     type: 'DELETE',
-            //     success: function () {
-            Swal.fire(
-                    'Deleted Id ' + id + '!',
-                    'Visual novel has been turned off',
-                    'success'
-                )
-                .then(function () {
-                    dataTable.ajax.reload();
-                });
-            //     }
-            // });
+            $.ajax({
+                url: "visual_novels/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'Visual novel has been turned off',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
         }
     })
 });

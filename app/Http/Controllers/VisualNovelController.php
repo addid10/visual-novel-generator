@@ -11,9 +11,7 @@ class VisualNovelController extends Controller
 {
     public function index()
     {
-        
         return view('visual_novels.index');
-    
     }
 
     public function toJson()
@@ -76,7 +74,7 @@ class VisualNovelController extends Controller
                 'title' => $request->title,
                 'synopsis' => $request->synopsis
             ]);
-
+            
             $visualNovel->genres()->sync($request->genres);
             
             return response()->json([
@@ -92,5 +90,12 @@ class VisualNovelController extends Controller
     }
 
 
+    public function destroy($id)
+    {
+        $visualNovel = VisualNovel::findOrFail($id);
+
+        $visualNovel->delete();
+        $visualNovel->genres()->detach();
+    }
 
 }

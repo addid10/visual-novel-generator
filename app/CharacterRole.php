@@ -13,4 +13,9 @@ class CharacterRole extends Model
             'character_visual_novel'
         );
     }
+    
+    public function visual_novels_characters()
+    {
+        return $this->hasMany('App\VisualNovelCharacter');
+    }
 }
