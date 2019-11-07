@@ -6,14 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Character extends Model
 {
-    public function visual_novels()
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    
+    public function visual_novels_characters()
     {
-        return $this->belongsToMany(
-            'App\VisualNovel', 
-            'character_visual_novel', 
-            'visual_novel_id', 
-            'character_id'
-        );
+        return $this->hasMany('App\VisualNovelCharacter');
     }
     
     public function characters_images()

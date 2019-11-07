@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisualNovel extends Model
 {
-    
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public function genres()
@@ -45,14 +44,9 @@ class VisualNovel extends Model
         );
     }
     
-    public function characters()
+    public function visual_novels_characters()
     {
-        return $this->belongsToMany(
-            'App\Character', 
-            'character_visual_novel', 
-            'visual_novel_id', 
-            'character_id'
-        );
+        return $this->hasMany('App\VisualNovelCharacter');
     }
 
     public function user()
