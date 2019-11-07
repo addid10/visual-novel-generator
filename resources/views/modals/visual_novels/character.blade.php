@@ -9,32 +9,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="visual-novel-characters-table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Image</th>
                                     <th>Name</th>
+                                    <th>Image</th>
                                     <th>Role</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>21-01-2019</td>
-                                    <td>Konsultasi Pra-Proposal</td>
-                                    <td>File</td>
-                                    <td>
-                                        <button class="btn btn-icon btn-gradient-danger btn-rounded"><span
-                                                class="mdi mdi-close-circle"></span></button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
     
                     </div>
                     <hr>
-                    <form>
+                    <form id="visual-novel-characters-form">
+                        @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlInput1">Name</label>
@@ -43,9 +34,11 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="exampleFormControlInput1">Keterangan</label>
+                                <label for="exampleFormControlInput1">Role</label>
                                 <select class="form-control form-control-sm" name="" id="">
-                                    <option value="">Main</option>
+                                    <option value="1">Main</option>
+                                    <option value="2">Supporting</option>
+                                    <option value="3">Guest</option>
                                 </select>
                             </div>
                         </div>
