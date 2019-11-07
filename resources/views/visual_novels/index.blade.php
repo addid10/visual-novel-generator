@@ -1,6 +1,7 @@
 @extends('layouts.template')
 
 @section('css')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ asset('assets/vendors/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endsection
 
@@ -41,10 +42,10 @@
 @endsection
 
 @section('modal')
-@include('modals.visual_novels.add');
-@include('modals.visual_novels.character');
-@include('modals.visual_novels.background');
-@include('modals.visual_novels.music');
+    @include('modals.visual_novels.add');
+    @include('modals.visual_novels.character');
+    @include('modals.visual_novels.background');
+    @include('modals.visual_novels.music');
 @endsection
 
 @section('javascript')
@@ -55,4 +56,5 @@
 
 {{-- Custom Javascript --}}
 <script src="{{ asset('js/visual_novel/visual_novel.js') }}"></script>
+<script src="{{ asset('js/visual_novel/character.js') }}"></script>
 @endsection
