@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="story-dialogues-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -21,33 +21,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-
-                                    <div class="character-image-sm">
-                                        <img src="{{ asset('bg/01.jpg') }}" alt="image">
-                                    </div>
-                                </td>
-                                <td>Konsultasi Pra-Proposal</td>
-                                <td>
-                                    <div class="bg-image-sm">
-                                        <img src="{{ asset('bg/01.jpg') }}" alt="image">
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-gradient-success btn-rounded"><span
-                                            class="mdi mdi-play-circle"></span></button>
-                                </td>
-                                <td>
-                                    <button class="d-block btn btn-sm btn-gradient-warning btn-rounded w-100">
-                                        Update
-                                    </button>
-                                    <button class="d-block btn btn-sm btn-gradient-danger btn-rounded w-100 mt-2">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
 
@@ -56,26 +29,28 @@
                 <form>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="character">Character</label>
-                            <select class="form-control form-control-sm" name="character_id" id="character">
-                                <option value="">Main</option>
+                            <label for="characters">Dialogue Number</label>
+                            <input type="number" class="form-control form-control-sm" name="dialogue_number"
+                                id="dialogue-number" placeholder="(Ex: 1,..)">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="characters">Character</label>
+                            <select class="form-control form-control-sm" name="character_id" id="characters">
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="exampleFormControlInput1">Background</label>
-                            <select class="form-control form-control-sm" name="background_id" id="background">
-                                <option value="">Main</option>
+                            <label for="backgrounds">Background</label>
+                            <select class="form-control form-control-sm" name="background_id" id="backgrounds">
                             </select>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleFormControlInput1">Music</label>
-                            <select class="form-control form-control-sm" name="music_id" id="music">
-                                <option value="">Main</option>
+                        <div class="form-group col-md-6">
+                            <label for="musics">Music</label>
+                            <select class="form-control form-control-sm" name="music_id" id="musics">
                             </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="dialogue">Dialogue</label>
-                            <textarea class="form-control" name="dialogue" id="dialogue" rows="5"
+                            <textarea class="form-control" name="dialogue" id="dialogue" rows="6"
                                 maxlength="100"></textarea>
                         </div>
                     </div>
