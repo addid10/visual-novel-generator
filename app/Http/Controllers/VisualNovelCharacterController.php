@@ -41,6 +41,7 @@ class VisualNovelCharacterController extends Controller
         }
 
     }
+    
     public function show($id)
     {
         $visualNovelCharacters = VisualNovelCharacter::with(['visual_novel', 'character' => function($query){
