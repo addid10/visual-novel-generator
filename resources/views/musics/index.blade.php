@@ -1,5 +1,10 @@
 @extends('layouts.template')
 
+@section('css')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="{{ asset('assets/vendors/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+@endsection
+
 @section('title', 'Musics')
 
 @section('content')
@@ -18,25 +23,11 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Music</th>
-                                <th colspan="2">Action</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>School-OST</td>
-                                <td>
-                                    <button class="btn btn-icon btn-gradient-danger btn-rounded"><span
-                                            class="mdi mdi-play-circle"></span></button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-warning update">
-                                        Update</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-danger delete">
-                                        Delete</button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -52,5 +43,10 @@
 @endsection
 
 @section('javascript')
+{{-- Datatable  --}}
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+{{-- Custom JS --}}
 <script src="{{ asset('js/music/music.js') }}"></script>
 @endsection
