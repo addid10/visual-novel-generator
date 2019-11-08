@@ -17,7 +17,6 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
     
     Route::prefix('visual_novels')->group(function () {
         Route::get('/', 'VisualNovelController@index')->name('visual_novels.index');
-        Route::get('/to-json', 'VisualNovelController@toJson');
         Route::post('/', 'VisualNovelController@store')->name('visual_novels.store');
         Route::put('/{visual_novel}', 'VisualNovelController@update')->name('visual_novels.update');
         Route::delete('/{visual_novel}', 'VisualNovelController@destroy')->name('visual_novels.destroy');
@@ -31,9 +30,9 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
 
 
     Route::prefix('assets')->group(function () {
-        Route::view('/characters', 'characters.index')->name('characters.index');
-        Route::view('/backgrounds', 'backgrounds.index')->name('backgrounds.index');
-        Route::view('/musics', 'musics.index')->name('musics.index');   
+        Route::get('/characters', 'CharacterController@index')->name('characters.index');
+        Route::get('/backgrounds', 'BackgroundController@index')->name('backgrounds.index');
+        Route::get('/musics', 'MusicController@index')->name('musics.index');   
     });
 });
 
