@@ -1,5 +1,10 @@
 @extends('layouts.template')
 
+@section('css')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="{{ asset('assets/vendors/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+@endsection
+
 @section('title', 'Characters')
 
 @section('content')
@@ -17,33 +22,13 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Image</th>
                                 <th>Sex</th>
-                                <th colspan="3">Action</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Fendy</td>
-                                <td>
-                                    <div class="nav-profile-img">
-                                        <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
-                                    </div>
-                                </td>
-                                <td>Male</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-info images">
-                                        Images</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-warning update">
-                                        Update</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-gradient-danger delete">
-                                        Delete</button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -55,9 +40,14 @@
 @endsection
 
 @section('modal')
-@include('modals.characters.add');
+@include('modals.characters.add'); 
 @endsection
 
 @section('javascript')
+{{-- Datatable  --}}
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+{{-- Custom JS --}}
 <script src="{{ asset('js/character/character.js') }}"></script>
 @endsection
