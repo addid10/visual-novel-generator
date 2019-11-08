@@ -29,20 +29,20 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlInput1">Name</label>
-                                <select class="form-control form-control-sm" name="" id="">
-                                    <option value="">Main</option>
+                                <select class="form-control form-control-sm" name="character_id" id="characters">
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlInput1">Role</label>
-                                <select class="form-control form-control-sm" name="" id="">
+                                <select class="form-control form-control-sm" name="character_role_id" id="">
                                     <option value="1">Main</option>
                                     <option value="2">Supporting</option>
                                     <option value="3">Guest</option>
                                 </select>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-gradient-success btn-rounded w-100">Add</button>
+                        <input type="hidden" name="visual_novel_id" id="visual-novel-character-id">
+                        <button type="submit" class="btn btn-gradient-success btn-rounded w-100">Add</button>
                     </form>
                 </div>
                 <div class="modal-footer">
