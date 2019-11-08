@@ -7,20 +7,12 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
-    public function index()
-    {
-        return view('characters.index');
-    }
-
-    public function toJson()
+    public function index(Request $request)
     {
         $characters = Character::get(['id', 'fullname', 'gender']);
-        
-        return response()->json([
-            'data' => $characters
-        ]);
-    }
 
+        return $request->ajax() ? response()->json(['data' => $characters]) : view('characters.index');
+    }
         
     public function store(Request $request)
     {
