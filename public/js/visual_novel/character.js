@@ -2,14 +2,15 @@
 $('#visual-novel-table tbody').on('click', '.characters', function () {
     let id = $(this).attr('id');
 
+    $('#visual-novel-characters-modal').modal('show');
+    $('#visual-novel-characters-table tbody').html('');
+
     $.ajax({
         url: "visual_novels/" + id + "/characters",
         dataType: "json",
         success: function (characters) {
-            console.log(characters)
-            $('#visual-novel-characters-modal').modal('show');
-            $('#visual-novel-characters-table tbody').html('');
 
+            $('#visual-novel-character-id').val(id);
 
             characters.data.forEach(function (result) {
                 let character =
@@ -29,6 +30,71 @@ $('#visual-novel-table tbody').on('click', '.characters', function () {
     })
 });
 
+// List of Characters 
+$(document).ready(function () {
+    $.ajax({
+        url: 'assets/characters',
+        type: "GET",
+        dataType: "json",
+        success: function (characters) {
+            characters.data.forEach(function (result) {
+                let character = '<option value="' + result.id + '">' + result.fullname + '</option>';
+                $('#characters').append(character);
+            })
+        }
+    })
+});
+
+//Submit
+$(document).on('submit', '#visual-novel-characters-form', function (e) {
+    e.preventDefault();
+
+    //Variables
+    let id = $('#visual-novel-character-id').val();
+    let formData = new FormData(this);
+
+    if (id !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 3000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        $.ajax({
+            url: "visual_novels/characters",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('#visual-novel-characters-form')[0].reset();
+
+                if (data.error == undefined) {
+                    Swal.fire({
+                            type: 'success',
+                            title: data.success,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#visual-novel-characters-modal').modal('hide');
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: data.error,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
+});
+
 // Delete 
 $('#visual-novel-characters-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
@@ -42,21 +108,22 @@ $('#visual-novel-characters-table tbody').on('click', '.delete', function () {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-        // if (result.value) {
-        //     $.ajax({
-        //         url: "visual_novels/" + id,
-        //         type: 'DELETE',
-        //         success: function () {
-        //             Swal.fire(
-        //                     'Deleted!',
-        //                     'Visual novel has been turned off',
-        //                     'success'
-        //                 )
-        //                 .then(function () {
-        //                     dataTable.ajax.reload();
-        //                 });
-        //         }
-        //     });
-        // }
+        if (result.value) {
+            $.ajax({
+                url: "visual_novels/characters/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'This character has been deleted!',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#visual-novel-characters-modal').modal('hide');
+                        });
+                }
+            });
+        }
     })
 });
