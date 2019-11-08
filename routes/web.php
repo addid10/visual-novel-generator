@@ -22,12 +22,15 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::delete('/{visual_novel}', 'VisualNovelController@destroy')->name('visual_novels.destroy');
         Route::get('/{visual_novel}/edit', 'VisualNovelController@edit')->name('visual_novels.edit');
 
-        
+        Route::get('/iseng', 'VisualNovelCharacterController@iseng')->name('visual_novel_characters.iseng');
+        Route::post('/characters', 'VisualNovelCharacterController@store')->name('visual_novel_characters.store');
+        Route::delete('/characters/{character}', 'VisualNovelCharacterController@destroy')->name('visual_novel_characters.destroy');
         Route::get('/{visual_novel}/characters', 'VisualNovelCharacterController@show')->name('visual_novel_characters.show');
     });
 
-    Route::view('/stories', 'stories.index')->name('stories.index');
-
+    Route::prefix('stories')->group(function () {
+        Route::get('/', 'StoryController@index')->name('stories.index');
+    });
 
     Route::prefix('assets')->group(function () {
         Route::get('/characters', 'CharacterController@index')->name('characters.index');
