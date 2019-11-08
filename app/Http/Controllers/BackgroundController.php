@@ -7,22 +7,12 @@ use Illuminate\Http\Request;
 
 class BackgroundController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $backgrounds = Background::get(['id', 'fullname', 'gender']);
+        $backgrounds = Background::get(['id', 'name', 'image']);
 
         return $request->ajax() ? response()->json(['data' => $backgrounds]) : view('backgrounds.index');
     }
-
-    public function toJson()
-    {
-        $backgrounds = Background::get(['id', 'fullname', 'gender']);
-        
-        return response()->json([
-            'data' => $backgrounds
-        ]);
-    }
-
         
     public function store(Request $request)
     {
