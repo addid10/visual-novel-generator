@@ -9,21 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class VisualNovelController extends Controller
 {
-    public function index()
-    {
-        return view('visual_novels.index');
-    }
-
-    public function toJson()
+    public function index(Request $request)
     {
         $visualNovel = VisualNovel::with('user')->get();
 
-        return response()->json([
-            'data' => $visualNovel
-        ]);
+        return $request->ajax() ? response()->json(['data' => $visualNovel]) : view('visual_novels.index');
     }
 
-    
     public function store(Request $request)
     {
         try {
