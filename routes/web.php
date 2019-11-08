@@ -30,6 +30,7 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
 
     Route::prefix('stories')->group(function () {
         Route::get('/', 'StoryController@index')->name('stories.index');
+        Route::get('/{visual_novel}', 'StoryController@show')->name('stories.show');
     });
 
     Route::prefix('assets')->group(function () {
