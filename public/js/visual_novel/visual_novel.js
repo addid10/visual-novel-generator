@@ -9,7 +9,7 @@ $.ajaxSetup({
 let dataTable = $('#visual-novel-table').DataTable({
     "processing": true,
     "ajax": {
-        url: "visual_novels/to-json"
+        url: "visual_novels"
     },
     "columns": [{
             data: 'title'
