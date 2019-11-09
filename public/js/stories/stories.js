@@ -28,24 +28,13 @@
      ]
  });
 
- //  Dialogue
- $('#stories-table tbody').on('click', '.stories', function () {
-     let id = $(this).attr("id");
 
-     //  Show Modal 
-     $('#stories-modal').modal('show');
-     $('#stories-action').text('Add');
-
-     //  Make data null 
-     $('#characters').html('');
-     $('#story-dialogues-table tbody').html('');
-
-     // List of Dialogue
+ function listDialogue(id) {
      $.ajax({
          url: "stories/" + id,
          dataType: "json",
          success: function (stories) {
-             console.log(stories);
+             $('#story-dialogues-table tbody').html('');
 
              $('#visual-novel-id').val(id);
 
@@ -67,6 +56,22 @@
              })
          }
      })
+ }
+
+ //  Dialogue
+ $('#stories-table tbody').on('click', '.stories', function () {
+     let id = $(this).attr("id");
+
+     //  Show Modal 
+     $('#stories-modal').modal('show');
+     $('#stories-action').text('Add');
+
+     //  Make data null 
+     $('#characters').html('');
+     $('#backgrounds').html('');
+     $('#musics').html('');
+
+     listDialogue(id);
 
      // List of Characters 
      $(document).ready(function () {
@@ -118,7 +123,6 @@
          url: "stories/" + id + "/edit",
          dataType: "json",
          success: function (result) {
-             console.log(result)
              $('#stories-action').text("Update");
 
              $('#dialogue-number').val(result.data.dialogue_number);
@@ -126,6 +130,7 @@
              $('#backgrounds').val(result.data.background_id);
              $('#musics').val(result.data.music_id);
              $('#dialogue').val(result.data.dialogue);
+             $('#stories-id').val(result.data.id);
 
          }
      })
@@ -134,6 +139,7 @@
  //DELETE THIS!
  $('#story-dialogues-table tbody').on('click', '.delete', function () {
      let id = $(this).attr('id');
+     let visualNovel = $('#visual-novel-id').val();
 
      Swal.fire({
          title: 'Are you sure?',
@@ -155,7 +161,7 @@
                      'success'
                  )
                  .then(function () {
-                     dataTable.ajax.reload();
+                     listDialogue(visualNovel);
                  });
              //     }
              // });
@@ -169,9 +175,10 @@
      e.preventDefault();
 
      //Variables
-     let id = $('#visual-novel-id').val();
+     let id = $('#stories-id').val();
      let formData = new FormData(this);
      let action = $('#stories-action').text();
+     let visualNovel = $('#visual-novel-id').val();
      let url;
 
      if (action == 'Add') {
@@ -181,7 +188,7 @@
          formData.append("_method", "PUT");
      }
 
-     if (id !== '') {
+     if (action !== '') {
          Swal.fire({
              title: 'Loading',
              timer: 3000,
@@ -207,8 +214,7 @@
                              timer: 1500
                          })
                          .then(function () {
-                             dataTable.ajax.reload();
-                             $('#stories-modal').modal('hide');
+                             listDialogue(visualNovel);
                          });
                  } else {
                      Swal.fire({
