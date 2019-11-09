@@ -45,20 +45,22 @@
          url: "stories/" + id,
          dataType: "json",
          success: function (stories) {
+             console.log(stories);
 
              $('#visual-novel-id').val(id);
 
              stories.data.forEach(function (result) {
                  let story =
-                     '<tr><td>1</td>' +
-                     '<td><div class="character-image-sm"><img src="" alt="character-image"></div></td>' +
-                     '<td>Konsultasi Pra-Proposal</td>' +
-                     '<td><div class="bg-image-sm"><img src="" alt="background-image"></div></td>' +
-                     '<td><button class="btn btn-icon btn-gradient-success btn-rounded">' +
+                     '<tr><td>' + result.dialogue_number + '</td>' +
+                     '<td><div class="character-image-sm"><img src="storages/' + result.character_image.image + '" alt="character-image"></div></td>' +
+                     '<td>' + result.dialogue + '</td>' +
+                     '<td><div class="bg-image-sm"><img src="storages/' + result.background.image + '" alt="background-image"></div></td>' +
+                     '<td><audio preload="auto" src="storages/' + result.music.music + '" id="' + result.music.name + '"></audio>' +
+                     '<button class="btn btn-icon btn-gradient-success btn-rounded play-music" id="' + result.music.name + '">' +
                      '<span class="mdi mdi-play-circle"></span></button></td>' +
                      '<td>' +
-                     '<button class="d-block btn btn-sm btn-gradient-warning btn-rounded w-100 update">Update</button>' +
-                     '<button class="d-block btn btn-sm btn-gradient-danger btn-rounded w-100 mt-2 delete">Delete</button>' +
+                     '<button class="d-block btn btn-sm btn-gradient-warning btn-rounded w-100 update" id="' + result.id + '">Update</button>' +
+                     '<button class="d-block btn btn-sm btn-gradient-danger btn-rounded w-100 mt-2 delete" id="' + result.id + '">Delete</button>' +
                      '</td></tr>';
 
                  $('#story-dialogues-table tbody').append(story);
@@ -66,18 +68,20 @@
          }
      })
 
-     //List Characters
-     $.ajax({
-         url: 'assets/characters',
-         type: "GET",
-         dataType: "json",
-         success: function (characters) {
-             characters.data.forEach(function (result) {
-                 let character = '<option value="' + result.id + '">' + result.fullname + '</option>';
-                 $('#characters').append(character);
-             })
-         }
-     })
+     // List of Characters 
+     $(document).ready(function () {
+         $.ajax({
+             url: 'assets/characters-images',
+             type: "GET",
+             dataType: "json",
+             success: function (characters) {
+                 characters.data.forEach(function (result) {
+                     let character = '<option value="' + result.id + '">' + result.image + '</option>';
+                     $('#characters').append(character);
+                 })
+             }
+         })
+     });
 
      //List Backgrounds
      $.ajax({
@@ -107,7 +111,7 @@
  });
 
  //Edit
- $('#stories-table tbody').on('click', '.update', function () {
+ $('#stories-dialogues-table tbody').on('click', '.update', function () {
      let id = $(this).attr('id');
 
      $.ajax({
@@ -125,4 +129,126 @@
 
          }
      })
+ });
+
+
+ $('#stories-dialogues-table tbody').on('click', '.delete', function () {
+     let id = $(this).attr('id');
+
+     Swal.fire({
+         title: 'Are you sure?',
+         text: "You won't be able to revert this!",
+         type: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Yes, delete it!'
+     }).then((result) => {
+         if (result.value) {
+             // $.ajax({
+             //     url: "lecturers/" + id,
+             //     type: 'DELETE',
+             //     success: function () {
+             Swal.fire(
+                     'Deleted!',
+                     'This dialogue has been deleted!',
+                     'success'
+                 )
+                 .then(function () {
+                     dataTable.ajax.reload();
+                 });
+             //     }
+             // });
+         }
+     })
+ });
+
+
+ //Submit
+ $(document).on('submit', '#stories-form', function (e) {
+     e.preventDefault();
+
+     //Variables
+     let id = $('#visual-novel-id').val();
+     let formData = new FormData(this);
+     let action = $('#stories-action').text();
+     let url;
+
+     if (action == 'Add') {
+         url = 'stories';
+     } else if (action == 'Update') {
+         url = 'stories/' + id;
+         formData.append("_method", "PUT");
+     }
+
+     if (id !== '') {
+         Swal.fire({
+             title: 'Loading',
+             timer: 3000,
+             onBeforeOpen: () => {
+                 Swal.showLoading()
+             }
+         });
+
+         $.ajax({
+             url: url,
+             type: "POST",
+             data: formData,
+             contentType: false,
+             processData: false,
+             success: function (data) {
+                 $('#stories-form')[0].reset();
+
+                 if (data.error == undefined) {
+                     Swal.fire({
+                             type: 'success',
+                             title: data.success,
+                             showConfirmButton: false,
+                             timer: 1500
+                         })
+                         .then(function () {
+                             dataTable.ajax.reload();
+                             $('#stories-modal').modal('hide');
+                         });
+                 } else {
+                     Swal.fire({
+                         type: 'error',
+                         title: data.error,
+                         showConfirmButton: false,
+                         timer: 1500
+                     })
+                 }
+             }
+         });
+     }
+ });
+
+ //Stop Others Musics
+ function isPlaying(audelem) {
+     let bool = !audelem.paused;
+
+     if (bool == false) {
+         $('audio').each(function () {
+             this.pause(); // Stop playing
+             this.currentTime = 0; // Reset time
+         });
+     }
+ }
+
+ // Play Music
+ let playing = true;
+ $('#story-dialogues-table tbody').on('click', '.play-music', function () {
+     let audioName = $(this).attr('id');
+     let audio = document.getElementById(audioName);
+
+     isPlaying(audio);
+
+     audio.play();
+
+     if (playing == false) {
+         playing = true;
+     } else {
+         playing = false;
+     }
+
  });
