@@ -151,20 +151,20 @@
          confirmButtonText: 'Yes, delete it!'
      }).then((result) => {
          if (result.value) {
-             // $.ajax({
-             //     url: "lecturers/" + id,
-             //     type: 'DELETE',
-             //     success: function () {
-             Swal.fire(
-                     'Deleted!',
-                     'This dialogue has been deleted!',
-                     'success'
-                 )
-                 .then(function () {
-                     listDialogue(visualNovel);
-                 });
-             //     }
-             // });
+             $.ajax({
+                 url: "stories/" + id,
+                 type: 'DELETE',
+                 success: function () {
+                     Swal.fire(
+                             'Deleted!',
+                             'This dialogue has been deleted!',
+                             'success'
+                         )
+                         .then(function () {
+                             listDialogue(visualNovel);
+                         });
+                 }
+             });
          }
      })
  });
