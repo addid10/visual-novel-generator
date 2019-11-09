@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
 {
+    protected $guarded = ['created_at', 'updated_at'];
+
     public function save_datas()
     {
         return $this->hasMany('App\SaveData');
@@ -21,7 +23,7 @@ class Story extends Model
         return $this->belongsTo('App\Music');
     }
 
-    public function characters_image()
+    public function character_image()
     {
         return $this->belongsTo('App\CharacterImage');
     }
