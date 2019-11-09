@@ -32,6 +32,8 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::get('/', 'StoryController@index')->name('stories.index');
         Route::post('/', 'StoryController@store')->name('stories.store');
         Route::get('/{visualNovel}', 'StoryController@show')->name('stories.show');
+        Route::put('/{stories}', 'StoryController@update')->name('stories.update');
+        Route::delete('/{stories}', 'StoryController@destroy')->name('stories.destroy');
         Route::get('/{stories}/edit', 'StoryController@edit')->name('stories.edit');
     });
 
