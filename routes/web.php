@@ -32,6 +32,7 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::get('/', 'StoryController@index')->name('stories.index');
         Route::post('/', 'StoryController@store')->name('stories.store');
         Route::get('/{visualNovel}', 'StoryController@show')->name('stories.show');
+        Route::get('/{stories}/edit', 'StoryController@edit')->name('stories.edit');
     });
 
     Route::prefix('assets')->group(function () {
