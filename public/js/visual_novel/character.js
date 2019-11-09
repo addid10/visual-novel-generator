@@ -6,7 +6,7 @@ $('#visual-novel-table tbody').on('click', '.characters', function () {
     $('#visual-novel-characters-table tbody').html('');
 
     $.ajax({
-        url: "visual_novels/" + id + "/characters",
+        url: "visual-novels/" + id + "/characters",
         dataType: "json",
         success: function (characters) {
 
@@ -63,7 +63,7 @@ $(document).on('submit', '#visual-novel-characters-form', function (e) {
         });
 
         $.ajax({
-            url: "visual_novels/characters",
+            url: "visual-novels/characters",
             type: "POST",
             data: formData,
             contentType: false,
@@ -110,7 +110,7 @@ $('#visual-novel-characters-table tbody').on('click', '.delete', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: "visual_novels/characters/" + id,
+                url: "visual-novels/characters/" + id,
                 type: 'DELETE',
                 success: function () {
                     Swal.fire(
