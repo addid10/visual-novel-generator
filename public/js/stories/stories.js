@@ -111,28 +111,28 @@
  });
 
  //Edit
- $('#stories-dialogues-table tbody').on('click', '.update', function () {
+ $('#story-dialogues-table tbody').on('click', '.update', function () {
      let id = $(this).attr('id');
 
      $.ajax({
-         url: "visual_novels/" + id + "/edit",
+         url: "stories/" + id + "/edit",
          dataType: "json",
          success: function (result) {
              console.log(result)
              $('#stories-action').text("Update");
 
-             $('#dialogue-number').val(result.id);
-             $('#characters').val(result.title);
-             $('#backgrounds').val(result.synopsis);
-             $('#musics').val(result.synopsis);
-             $('#dialogue').val(result.synopsis);
+             $('#dialogue-number').val(result.data.dialogue_number);
+             $('#characters').val(result.data.character_image_id);
+             $('#backgrounds').val(result.data.background_id);
+             $('#musics').val(result.data.music_id);
+             $('#dialogue').val(result.data.dialogue);
 
          }
      })
  });
 
-
- $('#stories-dialogues-table tbody').on('click', '.delete', function () {
+ //DELETE THIS!
+ $('#story-dialogues-table tbody').on('click', '.delete', function () {
      let id = $(this).attr('id');
 
      Swal.fire({
