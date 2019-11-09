@@ -9,7 +9,7 @@ $.ajaxSetup({
 let dataTable = $('#visual-novel-table').DataTable({
     "processing": true,
     "ajax": {
-        url: "visual_novels"
+        url: "visual-novels"
     },
     "columns": [{
             data: 'title'
@@ -72,7 +72,7 @@ $('#visual-novel-table tbody').on('click', '.update', function () {
     let genres = [];
 
     $.ajax({
-        url: "visual_novels/" + id + "/edit",
+        url: "visual-novels/" + id + "/edit",
         dataType: "json",
         success: function (result) {
             console.log(result)
@@ -106,9 +106,9 @@ $(document).on('submit', '#visual-novel-form', function (e) {
     let formData = new FormData(this);
 
     if (action == "Add") {
-        url = "visual_novels"
+        url = "visual-novels"
     } else if (action == "Update") {
-        url = "visual_novels/" + id
+        url = "visual-novels/" + id
         formData.append("_method", "PUT");
     }
 
@@ -170,7 +170,7 @@ $('#visual-novel-table tbody').on('click', '.delete', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: "visual_novels/" + id,
+                url: "visual-novels/" + id,
                 type: 'DELETE',
                 success: function () {
                     Swal.fire(
