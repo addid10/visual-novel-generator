@@ -49,4 +49,29 @@ class StoryController extends Controller
             'data' => $stories
         ]);
     }
+    
+    public function update(Request $request, $id)
+    {
+        try {
+            $stories = Story::findOrFail($id);
+
+            $stories->update([
+                'dialogue_number' => $request->dialogue_number,
+                'dialogue' => $request->dialogue,
+                'character_image_id' => $request->character_id,
+                'background_id' => $request->background_id,
+                'music_id' => $request->music_id
+            ]);
+            
+            return response()->json([
+                'success' => "Data updated successfully!"
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => "Failed data execution!",
+                'message' => $th
+            ]);
+        }
+    }
 }
