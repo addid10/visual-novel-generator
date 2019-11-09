@@ -74,4 +74,10 @@ class StoryController extends Controller
             ]);
         }
     }
+
+    public function destroy($id)
+    {
+        $stories = Story::findOrFail($id);
+        $stories->delete();
+    }
 }
