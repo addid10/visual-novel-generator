@@ -17,11 +17,30 @@ class StoryController extends Controller
     
     public function show($id)
     {
-        $stories = Story::with(['character', 'background', 'music'])
+        $stories = Story::with(['character_image', 'background', 'music'])
         ->whereVisualNovelId($id)->get();
 
         return response()->json([
             'data' => $stories
         ]);
+    }
+
+    public function store(Request $request)
+    {
+
+            Story::create([
+                'dialogue_number' => $request->dialogue_number,
+                'dialogue' => $request->dialogue,
+                'visual_novel_id' => $request->visual_novel_id,
+                'character_image_id' => $request->character_id,
+                'background_id' => $request->background_id,
+                'music_id' => $request->music_id
+            ]);
+            
+            return response()->json([
+                'success' => "Data added successfully!"
+            ]);
+       
+
     }
 }
