@@ -55,6 +55,7 @@
                         </div>
                     </div>
                     <input type="hidden" id="visual-novel-id" name="visual_novel_id">
+                    <input type="hidden" id="stories-id">
                     <button type="submit" class="btn btn-gradient-success btn-rounded w-100"
                         id="stories-action">Add</button>
                 </form>
