@@ -28,8 +28,8 @@
 
         </li>
         @if(Auth::user()->role->name === "creator")
-        <li class="nav-item {{ Request::is('visual_novels*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('visual_novels.index') }}">
+        <li class="nav-item {{ Request::is('visual-novels*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('visual-novels.index') }}">
                 <span class="menu-title">Visual Novel</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
