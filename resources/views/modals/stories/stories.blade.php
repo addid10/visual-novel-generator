@@ -26,7 +26,7 @@
 
                 </div>
                 <hr>
-                <form>
+                <form id="stories-form">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="characters">Dialogue Number</label>
@@ -54,8 +54,8 @@
                                 maxlength="100"></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="visual-novel-id">
-                    <button type="button" class="btn btn-gradient-success btn-rounded w-100"
+                    <input type="hidden" id="visual-novel-id" name="visual_novel_id">
+                    <button type="submit" class="btn btn-gradient-success btn-rounded w-100"
                         id="stories-action">Add</button>
                 </form>
             </div>
