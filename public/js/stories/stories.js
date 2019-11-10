@@ -35,7 +35,6 @@
          dataType: "json",
          success: function (stories) {
              $('#story-dialogues-table tbody').html('');
-
              $('#visual-novel-id').val(id);
 
              stories.data.forEach(function (result) {
@@ -74,30 +73,36 @@
      listDialogue(id);
 
      // List of Characters 
-     $(document).ready(function () {
-         $.ajax({
-             url: 'assets/characters-images',
-             type: "GET",
-             dataType: "json",
-             success: function (characters) {
-                 characters.data.forEach(function (result) {
-                     let character = '<option value="' + result.id + '">' + result.image + '</option>';
-                     $('#characters').append(character);
-                 })
-             }
-         })
-     });
+     $.ajax({
+         url: 'assets/characters-images',
+         type: "GET",
+         data: {
+             id: id
+         },
+         dataType: "json",
+         success: function (data) {
+             data.forEach(function (result) {
+                 let character = '<option value="' + result.id + '">' + result.image + '</option>';
+                 $('#characters').append(character);
+             })
+         }
+     })
 
      //List Backgrounds
      $.ajax({
          url: 'assets/backgrounds',
          type: "GET",
+         data: {
+             id: id
+         },
          dataType: "json",
-         success: function (backgrounds) {
-             backgrounds.data.forEach(function (result) {
-                 let background = '<option value="' + result.id + '">' + result.name + '</option>';
-                 $('#backgrounds').append(background);
-             })
+         success: function (result) {
+             if (result.data.backgrounds !== undefined) {
+                 result.data.backgrounds.forEach(function (result) {
+                     let background = '<option value="' + result.id + '">' + result.name + '</option>';
+                     $('#backgrounds').append(background);
+                 })
+             }
          }
      })
 
@@ -105,12 +110,17 @@
      $.ajax({
          url: 'assets/musics',
          type: "GET",
+         data: {
+             id: id
+         },
          dataType: "json",
-         success: function (musics) {
-             musics.data.forEach(function (result) {
-                 let music = '<option value="' + result.id + '">' + result.name + '</option>';
-                 $('#musics').append(music);
-             })
+         success: function (result) {
+             if (result.data.musics !== undefined) {
+                 result.data.musics.forEach(function (result) {
+                     let music = '<option value="' + result.id + '">' + result.name + '</option>';
+                     $('#musics').append(music);
+                 })
+             }
          }
      })
  });
