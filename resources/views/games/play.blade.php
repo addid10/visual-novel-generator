@@ -18,13 +18,35 @@
         </div>
     </div>
 
+    {{-- Asset --}}
+    @foreach($games as $game)
+        @if(!$game->musics->isEmpty())
+            @foreach ($game->musics as $music)
+                <audio preload="auto" src="{{ asset('storages/'.$music->music) }}" id="{{ $music->name }}"></audio>
+            @endforeach
+            @foreach ($game->backgrounds as $background)
+                <img src="{{ asset('storages/'.$background->image) }}" alt="" srcset="" class="d-none">
+            @endforeach
+        @endif
+    @endforeach
+    @foreach($charactersImages as $characterImage)
+        <img src="{{ asset('storages/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
+    @endforeach
+    {{-- Asset End --}}
+
+
     <section class="background" style="background-image: url({{ asset('storages/backgrounds/01.jpg') }})">
         <div class="d-flex justify-content-end">
             <nav class="visual-novel-menu">
                 <ul>
-                    <li><a href="#">Load Game</a></li>
-                    <li><a href="#">Save Game</a></li>
-                    <li><a href="{{ route('stories.list') }}">Quit</a></li>
+                    <li>
+                        <form action="{{ route('game.save', ['id' => $id]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" id="dialogue-number" name="save" value="{{ Request::input('load') }}">
+                            <button type="submit" class="btn-normal save-game">Save Game</button>
+                        </form>
+                    </li>
+                    <li><a href="{{ route('game.menu', ['id' => $id]) }}">Quit</a></li>
                 </ul>
             </nav>
 
@@ -49,5 +71,6 @@
 @endsection
 
 @section('javascript')
-<script src="{{ asset('js/loader.js') }}"></script>
+    <script src="{{ asset('js/loader.js') }}"></script>
+    <script src="{{ asset('js/game/game.js') }}"></script>
 @endsection
