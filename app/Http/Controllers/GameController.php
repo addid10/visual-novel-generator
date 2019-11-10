@@ -47,18 +47,18 @@ class GameController extends Controller
         ->where('visual_novels_characters.visual_novel_id', '=', $id)
         ->get(['characters_images.id', 'characters_images.image']);
         
-        return $request->ajax() ? response()->json(['data' => $games]) : view('games.play', ['games' => $games, 'id' => $id, 'charactersImages' => $charactersImages]);
+        return $request->ajax() ? response()->json(['data' => $games]) : view('games.play', ['games' => $games, 'id' => $id, 'charactersImages' => $charactersImages, 'title' => $games[0]->title]);
     }
 
     public function showNextDialogue(Request $request, $id)
     {
-        $dialogue = Story::with(['character_image', 'background', 'music'])
+        $dialogue = Story::with(['character_image' => function($characterImage){
+            $characterImage->with('character');
+        }, 'background', 'music'])
         ->whereVisualNovelId($id)
-        ->whereDialogueNumber($request->dialogue_number)
-        ->get();
-        
-        return response()->json([
-            'data' => $dialogue
-        ]);
+        ->whereDialogueNumber($request->number)
+        ->first();
+
+        return response()->json($dialogue);
     }
 }
