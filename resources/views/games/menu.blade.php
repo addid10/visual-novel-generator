@@ -18,10 +18,9 @@
                             <a href="#">GSA Visual Novel</a>
                         </h1>
                         <hr>
-                        <label class="w-100"><a class="d-block" href="{{ route('game.index') }}">New Game</a></label>
-                        <label class="w-100"><a class="d-block" href="{{ route('game.index') }}">Load Game</a></label>
+                        <label class="w-100"><a class="d-block" href="{{ route('game.play', ['id' => $id]) }}">New Game</a></label>
+                        <label class="w-100"><a class="d-block" href="{{ route('game.play', ['id' => $id, 'load' => $loadData]) }}">Load Game</a></label>
                         <label class="w-100"><a class="d-block" href="{{ route('game.index') }}">Quit</a></label>
-                        {{ var_dump($menu) }}
                     </div>
                 </nav>
 
