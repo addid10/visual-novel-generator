@@ -57,4 +57,6 @@
 {{-- Custom Javascript --}}
 <script src="{{ asset('js/visual_novel/visual_novel.js') }}"></script>
 <script src="{{ asset('js/visual_novel/character.js') }}"></script>
+<script src="{{ asset('js/visual_novel/background.js') }}"></script>
+<script src="{{ asset('js/visual_novel/music.js') }}"></script>
 @endsection
