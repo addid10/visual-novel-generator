@@ -90,4 +90,24 @@ class VisualNovelController extends Controller
         $visualNovel->genres()->detach();
     }
 
+    public function backgrounds($id)
+    {
+        $visualNovelBackgrounds = VisualNovel::with('backgrounds')
+        ->findOrFail($id);
+
+        return response()->json([
+            'data' => $visualNovelBackgrounds
+        ]);
+    }
+
+    public function musics($id)
+    {
+        $visualNovelMusics = VisualNovel::with('musics')
+        ->findOrFail($id);
+
+        return response()->json([
+            'data' => $visualNovelMusics
+        ]);
+    }
+
 }
