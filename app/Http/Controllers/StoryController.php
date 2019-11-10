@@ -17,7 +17,9 @@ class StoryController extends Controller
     
     public function show($id)
     {
-        $stories = Story::with(['character_image', 'background', 'music'])
+        $stories = Story::with(['character_image', 'background', 'music' => function($music){
+            
+        }])
         ->whereVisualNovelId($id)->get();
 
         return response()->json([
