@@ -21,6 +21,8 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
         Route::put('/{visualNovel}', 'VisualNovelController@update')->name('visual-novels.update');
         Route::delete('/{visualNovel}', 'VisualNovelController@destroy')->name('visual-novels.destroy');
         Route::get('/{visualNovel}/edit', 'VisualNovelController@edit')->name('visual-novels.edit');
+        Route::get('/{visualNovel}/backgrounds', 'VisualNovelController@backgrounds')->name('backgrounds');
+        Route::get('/{visualNovel}/musics', 'VisualNovelController@musics')->name('musics');
 
         Route::get('/iseng', 'VisualNovelCharacterController@iseng')->name('visual-novel-characters.iseng');
         Route::post('/characters', 'VisualNovelCharacterController@store')->name('visual-novel-characters.store');
@@ -54,7 +56,8 @@ Route::group([ 'middleware' => ['auth','role:creator&guest star']], function () 
     Route::prefix('game')->group(function () {
         Route::get('/', 'GameController@index')->name('game.index');
         Route::get('{game}/menu', 'GameController@menu')->name('game.menu');
-        // Route::get('/play', 'games.play')->name('game.play');
+        Route::get('{game}/play', 'GameController@play')->name('game.play');
+        Route::post('{game}/save', 'GameController@save')->name('game.save');
         
     });
 
