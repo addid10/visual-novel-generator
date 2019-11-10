@@ -36,11 +36,13 @@
                         <div class="form-group col-md-6">
                             <label for="characters">Character</label>
                             <select class="form-control form-control-sm" name="character_id" id="characters">
+                                <option value="">Null</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="backgrounds">Background</label>
                             <select class="form-control form-control-sm" name="background_id" id="backgrounds">
+                                <option value="">Null</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
