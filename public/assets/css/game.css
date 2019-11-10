@@ -344,3 +344,10 @@ nav h1 a {
     color: #FFF;
     display: block;
 }
+
+.btn-normal {
+    color: #FFF;
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
