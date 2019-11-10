@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\VisualNovel;
 use App\Background;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,9 @@ class BackgroundController extends Controller
 {
     public function index(Request $request)
     {
-        $backgrounds = Background::get(['id', 'name', 'image']);
+        $id = $request->id;
+
+        $backgrounds = VisualNovel::with('backgrounds')->whereId($id)->first(['id']);
 
         return $request->ajax() ? response()->json(['data' => $backgrounds]) : view('backgrounds.index');
     }
