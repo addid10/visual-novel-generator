@@ -58,6 +58,7 @@ Route::group([ 'middleware' => ['auth','role:creator&guest star']], function () 
         Route::get('{game}/menu', 'GameController@menu')->name('game.menu');
         Route::get('{game}/play', 'GameController@play')->name('game.play');
         Route::post('{game}/save', 'GameController@save')->name('game.save');
+        Route::get('{game}/next', 'GameController@showNextDialogue')->name('game.next');
         
     });
 
