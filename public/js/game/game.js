@@ -22,7 +22,7 @@ function isPlaying(audelem) {
     }
 }
 
-function nextDialogue(number) {
+function nextDialogue(number, callback) {
     $.ajax({
         type: "GET",
         url: "next",
@@ -62,9 +62,11 @@ function nextDialogue(number) {
 
                 $('#dialogue').text(data.dialogue);
                 $('#dialogue-number').text(data.dialogue_number);
+                callback();
             }
         }
     })
+
 }
 
 
@@ -83,9 +85,18 @@ $(document).ready(function () {
 })
 
 $('.background').click(function () {
-    nextDialogue(sceneNumber);
-    sceneNumber++
+    nextDialogue(sceneNumber, function () {
+        sceneNumber++
+    });
 });
+
+$('#start-game').click(function () {
+    nextDialogue(sceneNumber, function () {
+        $('.menu-position').css('display', 'none');
+        sceneNumber++
+    });
+
+})
 
 // Save
 
