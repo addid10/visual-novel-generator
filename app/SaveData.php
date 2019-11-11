@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SaveData extends Model
 {
     protected $table = 'save_datas';
+    protected $guarded = ['created_at', 'updated_at'];
     
     public function story()
     {
