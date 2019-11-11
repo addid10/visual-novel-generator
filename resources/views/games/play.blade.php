@@ -19,19 +19,29 @@
         </div>
     </div>
 
+    <div class="menu-position">
+        <div>
+            <label class="w-100">
+                <span href="#" class="d-block" id="start-game">
+                    <i class="mdi mdi-play-circle"></i> Start Game
+                </span>
+            </label>
+        </div>
+    </div>
+
     {{-- Asset --}}
     @foreach($games as $game)
-        @if(!$game->musics->isEmpty())
-            @foreach ($game->musics as $music)
-                <audio preload="auto" src="{{ asset('storages/'.$music->music) }}" id="{{ $music->name }}" loop></audio>
-            @endforeach
-            @foreach ($game->backgrounds as $background)
-                <img src="{{ asset('storages/'.$background->image) }}" alt="" srcset="" class="d-none">
-            @endforeach
-        @endif
+    @if(!$game->musics->isEmpty())
+    @foreach ($game->musics as $music)
+    <audio preload="auto" src="{{ asset('storages/'.$music->music) }}" id="{{ $music->name }}" loop></audio>
+    @endforeach
+    @foreach ($game->backgrounds as $background)
+    <img src="{{ asset('storages/'.$background->image) }}" alt="" srcset="" class="d-none">
+    @endforeach
+    @endif
     @endforeach
     @foreach($charactersImages as $characterImage)
-        <img src="{{ asset('storages/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
+    <img src="{{ asset('storages/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
     @endforeach
     {{-- Asset End --}}
     <section class="save">
@@ -41,7 +51,8 @@
                     <li>
                         <form id="save-form" action="{{ route('game.save', ['id' => $id]) }}" method="POST">
                             @csrf
-                            <input type="hidden" id="dialogue-number" value="{{ Request::input('load') ? Request::input('load') : '1' }}">
+                            <input type="hidden" id="dialogue-number"
+                                value="{{ Request::input('load') ? Request::input('load') : '1' }}">
                             <input type="hidden" id="story-id" name="id">
                             <button type="submit" class="btn-normal save-game">Save Game</button>
                         </form>
@@ -59,7 +70,7 @@
         </div>
         <div class="row box">
             <div class="virtual-box">
-                <div class="character-name" id="character-name"> . . . 
+                <div class="character-name" id="character-name"> . . .
                 </div>
                 <div class="virtual-text-box" id="dialogue">
                 </div>
@@ -71,6 +82,6 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('js/loader.js') }}"></script>
-    <script src="{{ asset('js/game/game.js') }}"></script>
+<script src="{{ asset('js/loader.js') }}"></script>
+<script src="{{ asset('js/game/game.js') }}"></script>
 @endsection
