@@ -6,6 +6,7 @@ use Auth;
 use App\VisualNovel;
 use App\SaveData;
 use App\Story;
+use App\Helpers\SaveDataHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,5 +61,37 @@ class GameController extends Controller
         ->first();
 
         return response()->json($dialogue);
+    }
+
+    public function save(Request $request, $id){ 
+
+            $validator = SaveDataHelper::checkSaveData($id, Auth::user()->id);
+
+            if($validator) {
+
+                $save = SaveData::create([
+                    'story_id' => $request->id,
+                    'user_id' => Auth::user()->id,
+                    'visual_novel_id' => $id
+                ]);
+                
+                return response()->json([
+                    'success' => "File saved!"
+                ]);
+
+            } else {
+                $save = SaveData::findOrFail(Auth::user()->id);
+
+                $save->update([
+                    'story_id' => $request->id,
+                    'visual_novel_id' => $id
+                ]);
+
+                return response()->json([
+                    'success' => "File saved!"
+                ]);
+            }
+
+      
     }
 }
