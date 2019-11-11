@@ -25,11 +25,11 @@ class GameController extends Controller
         $userId = Auth::user()->id;
 
         $saveData = SaveData::with('story')
-        ->whereUserId(1)
+        ->whereUserId($userId)
         ->whereVisualNovelId($id)
         ->first();
 
-        if($saveData === 'null'){
+        if(!empty($saveData->story)){
             $loadData = $saveData->story->dialogue_number;
         } else {
             $loadData = 1;
