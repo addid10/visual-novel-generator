@@ -24,10 +24,13 @@ class GameController extends Controller
     {        
         $userId = Auth::user()->id;
 
-        $saveData = SaveData::with('story')
+        $saveData = SaveData::with(['story'])
         ->whereUserId($userId)
         ->whereVisualNovelId($id)
         ->first();
+
+        $visualNovel = VisualNovel::findOrFail($id);
+        $title = $visualNovel->title;
 
         if(!empty($saveData->story)){
             $loadData = $saveData->story->dialogue_number;
@@ -35,7 +38,7 @@ class GameController extends Controller
             $loadData = 1;
         }
 
-        return view('games.menu', ['loadData' => $loadData, 'id' => $id]);
+        return view('games.menu', ['loadData' => $loadData, 'id' => $id, 'title' => $title]);
     }
 
     public function play(Request $request, $id)
