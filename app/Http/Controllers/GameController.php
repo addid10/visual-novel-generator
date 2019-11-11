@@ -80,7 +80,8 @@ class GameController extends Controller
                 ]);
 
             } else {
-                $save = SaveData::findOrFail(Auth::user()->id);
+                $save = SaveData::where('visual_novel_id', $id)
+                ->where('user_id', Auth::user()->id)->first();
 
                 $save->update([
                     'story_id' => $request->id,
