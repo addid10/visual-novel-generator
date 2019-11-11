@@ -34,24 +34,25 @@
         <img src="{{ asset('storages/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
     @endforeach
     {{-- Asset End --}}
-
-    <section class="background">
+    <section class="save">
         <div class="d-flex justify-content-end">
             <nav class="visual-novel-menu">
                 <ul>
                     <li>
-                        <form action="{{ route('game.save', ['id' => $id]) }}" method="POST">
+                        <form id="save-form" action="{{ route('game.save', ['id' => $id]) }}" method="POST">
                             @csrf
-                            <input type="hidden" id="dialogue-number" name="save" value="{{ Request::input('load') ? Request::input('load') : 1 }}">
+                            <input type="hidden" id="dialogue-number" value="{{ Request::input('load') ? Request::input('load') : '1' }}">
+                            <input type="hidden" id="story-id" name="id">
                             <button type="submit" class="btn-normal save-game">Save Game</button>
                         </form>
                     </li>
                     <li><a href="{{ route('game.menu', ['id' => $id]) }}">Quit</a></li>
                 </ul>
             </nav>
-
         </div>
+    </section>
 
+    <section class="background">
         <div class="character row ml-0 mr-0">
             <div id="character-faceclaim" class="col-6 mx-auto">
             </div>
