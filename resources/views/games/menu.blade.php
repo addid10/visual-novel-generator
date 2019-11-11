@@ -15,7 +15,7 @@
                 <nav class="game-menu-position">
                     <div class="game-menu">
                         <h1>
-                            <a href="#">GSA Visual Novel</a>
+                            {{ $title }}
                         </h1>
                         <hr>
                         <label class="w-100"><a class="d-block" href="{{ route('game.play', ['id' => $id]) }}">New Game</a></label>
@@ -27,4 +27,5 @@
             </div>
         </div>
     </div>
-    @endsection
+</body>
+@endsection
