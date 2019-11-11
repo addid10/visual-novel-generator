@@ -31,7 +31,8 @@ function nextDialogue(number) {
         },
         success: function (data) {
             if (data.id !== undefined) {
-                console.log(data)
+                $('#story-id').val(data.id);
+
                 audio = audios[data.music.name];
 
                 isPlaying(audio);
@@ -81,7 +82,41 @@ $(document).ready(function () {
     })
 })
 
-$(document).click(function () {
+$('.background').click(function () {
     nextDialogue(sceneNumber);
     sceneNumber++
 });
+
+// Save
+
+$('#save-form').submit(function (e) {
+    e.preventDefault();
+
+    let url = $(this).attr('action');
+    let formData = new FormData(this);
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data.error == undefined) {
+                Swal.fire({
+                    type: 'success',
+                    title: data.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    })
+})
