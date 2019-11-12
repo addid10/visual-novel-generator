@@ -41,9 +41,65 @@ let dataTable = $('#character-table').DataTable({
     ]
 });
 
-$(document).on('click', '.show-images', function () {
-    $('#character-images-modal').modal('show');
+function indexImages(id) {
+    $.ajax({
+        url: "characters-images/" + id,
+        success: function (data) {
+            $('#character-images-modal').modal('show');
+            $('#character-images').html('');
+
+            data.forEach(function (result) {
+                let image = '<div class="col-md-6">' +
+                    '<div class="image-position">' +
+                    '<img src="../storages/' + result.image + '" class="w-100 mb-5 rounded image-detail" alt="' + result.name + '">' +
+                    '<button id="' + result.id + '" class="btn btn-danger btn-sm delete-images"><span class="mdi mdi-delete"></span></button>' +
+                    '</div>' +
+                    '</div>';
+
+                $('#character-images').append(image);
+            })
+        }
+    })
+}
+
+$('#character-table tbody').on('click', '.show-images', function () {
+
+    let id = $(this).attr('id');
+    indexImages(id)
+
 })
+
+$('#character-table tbody').on('click', '.delete-images', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "characters-images/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'Images successfully deleted.',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            indexImages(id)
+                        });
+                }
+            });
+        }
+    })
+});
 
 $('#character-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
