@@ -29,3 +29,22 @@ table.dataTable th {
     background-image: -webkit-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
     background-image: -ms-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
 }
+
+.image-detail {
+    object-fit: cover;
+    width: 215px !important;
+    height: 215px;
+    border: 1px solid rgba(0, 0, 0, 0.233);
+    object-position: center center;
+}
+
+.image-position {
+    position: relative;
+}
+
+
+.image-position button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
