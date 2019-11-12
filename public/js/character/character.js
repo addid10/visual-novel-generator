@@ -21,7 +21,7 @@ let dataTable = $('#character-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return '<button id="' + buttonId + '" class="d-block btn btn-sm btn-gradient-primary images">Images</button>';
+                return '<button id="' + buttonId + '" class="d-block btn btn-sm btn-gradient-primary show-images">Images</button>';
             }
         },
         {
@@ -41,7 +41,9 @@ let dataTable = $('#character-table').DataTable({
     ]
 });
 
-
+$(document).on('click', '.show-images', function () {
+    $('#character-images-modal').modal('show');
+})
 
 $('#character-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
