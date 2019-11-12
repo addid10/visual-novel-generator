@@ -42,6 +42,7 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
     Route::prefix('assets')->group(function () {
         Route::get('/characters', 'CharacterController@index')->name('characters.index');
         Route::get('/characters-images', 'CharacterImageController@index')->name('characters-images.index');   
+        Route::get('/characters-images/{characterImages}', 'CharacterImageController@show')->name('characters-images.show');   
 
 
         Route::get('/backgrounds', 'BackgroundController@index')->name('backgrounds.index');
