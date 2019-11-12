@@ -41,6 +41,7 @@
 
 @section('modal')
 @include('modals.characters.add'); 
+@include('modals.characters.images'); 
 @endsection
 
 @section('javascript')
