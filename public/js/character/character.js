@@ -69,7 +69,7 @@ $('#character-table tbody').on('click', '.show-images', function () {
 
 })
 
-$('#character-table tbody').on('click', '.delete-images', function () {
+$(document).on('click', '.delete-images', function () {
     let id = $(this).attr("id");
 
     Swal.fire({
