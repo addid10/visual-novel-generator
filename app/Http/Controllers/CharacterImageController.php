@@ -28,5 +28,12 @@ class CharacterImageController extends Controller
 
         return response()->json($characterImages);
     }
+
+    public function destroy($id)
+    {
+        $characterImage = CharacterImage::findOrFail($id);
+
+        $characterImage->delete();
+    }
         
 }
