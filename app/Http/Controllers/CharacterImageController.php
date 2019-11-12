@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CharacterImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,14 @@ class CharacterImageController extends Controller
         ->where('visual_novels_characters.visual_novel_id', '=', $id)
         ->get(['characters_images.id', 'characters_images.image']);
 
-        return $request->ajax() ? response()->json($charactersImages) : view('characters.index');
+        return response()->json($charactersImages);
+    }
+
+    public function show($id)
+    {
+        $characterImages = CharacterImage::whereCharacterId($id)->get();
+
+        return response()->json($characterImages);
     }
         
 }
