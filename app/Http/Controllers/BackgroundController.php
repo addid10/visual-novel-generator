@@ -4,40 +4,63 @@ namespace App\Http\Controllers;
 
 use App\VisualNovel;
 use App\Background;
+use App\Helpers\UploadHelper;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BackgroundController extends Controller
 {
     public function index(Request $request)
     {
-        $id = $request->id;
-
-        $backgrounds = VisualNovel::with('backgrounds')->whereId($id)->first(['id']);
+        $backgrounds = Background::get();
 
         return $request->ajax() ? response()->json(['data' => $backgrounds]) : view('backgrounds.index');
     }
         
+    public function specific(Request $request)
+    {
+        $id = $request->id;
+
+        $backgrounds = VisualNovel::with('backgrounds')->whereId($id)->first(['id']);
+
+        return response()->json([
+            'data' => $backgrounds
+        ]);
+    }
+
     public function store(Request $request)
     {
         try {
+            
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|unique:backgrounds,name',
             ]);
 
             if($validator->fails()) {
                 return response()->json([
-                    'error' => "The title has already been taken!"
+                    'error' => "The background has already been taken!"
                 ]);
             }
-
-            Background::create([
-                'fullname' => $request->title,
-                'nickname' => $request->synopsis,
-                'synopsis' => $request->synopsis,
-                'gender' => $request->synopsis,
-                'description' => $request->synopsis
-            ]);
             
+            $background = new Background;
+
+            $background->name = $request->name;
+            
+            
+            if ($request->hasFile('image')) {
+
+                $imageName = UploadHelper::uploadImage(
+                    $request->file('image'), 
+                    $request->name,
+                    'backgrounds'
+                );
+
+                $background->image = $imageName;
+            }
+            $background->save();
+            $background->visual_novels()->attach($request->visual_novels);
+
             return response()->json([
                 'success' => "Data added successfully!"
             ]);
