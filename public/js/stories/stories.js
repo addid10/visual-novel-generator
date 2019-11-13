@@ -90,7 +90,7 @@
 
      //List Backgrounds
      $.ajax({
-         url: 'assets/backgrounds',
+         url: 'assets/backgrounds/specific',
          type: "GET",
          data: {
              id: id
@@ -108,7 +108,7 @@
 
      //List Musics
      $.ajax({
-         url: 'assets/musics',
+         url: 'assets/musics/specific',
          type: "GET",
          data: {
              id: id
