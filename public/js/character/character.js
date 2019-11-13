@@ -52,7 +52,7 @@ function indexImages(id) {
                 let image = '<div class="col-md-6">' +
                     '<div class="image-position">' +
                     '<img src="../storages/' + result.image + '" class="w-100 mb-5 rounded image-detail" alt="' + result.name + '">' +
-                    '<button id="' + result.id + '" class="btn btn-danger btn-sm delete-images"><span class="mdi mdi-delete"></span></button>' +
+                    '<button id="' + result.id + '" class="btn btn-danger btn-sm delete-images" value="' + id + '"><span class="mdi mdi-delete"></span></button>' +
                     '</div>' +
                     '</div>';
 
@@ -62,15 +62,104 @@ function indexImages(id) {
     })
 }
 
+// Show Images
 $('#character-table tbody').on('click', '.show-images', function () {
-
     let id = $(this).attr('id');
     indexImages(id)
+});
 
-})
+// Click Button Add
+$('#character-add').click(function () {
+    $('#character-form')[0].reset();
+    $('#character-title').text("Add character");
+    $('#character-action').text("Add");
+});
 
+//Fetch datas for update
+$('#character-table tbody').on('click', '.update', function () {
+    let id = $(this).attr('id');
+
+    $.ajax({
+        url: "characters/" + id + "/edit",
+        dataType: "json",
+        success: function (result) {
+            $('#character-modal').modal('show');
+            $('#character-title').text("Update character");
+            $('#character-action').text("Update");
+
+            $('#fullname').val(result.fullname);
+            $('#nickname').val(result.nickname);
+            $('#sex').val(result.gender);
+            $('#description').val(result.description);
+            $('#character-id').val(result.id);
+        }
+    })
+});
+
+// Store
+$(document).on('submit', '#character-form', function (e) {
+    e.preventDefault();
+
+    //Variables
+    let action = $('#character-action').text();
+    let id = $('#character-id').val();
+    let url;
+
+    let formData = new FormData(this);
+
+    if (action == "Add") {
+        url = "characters";
+    } else if (action == "Update") {
+        url = "characters/" + id;
+        formData.append("_method", "PUT");
+    }
+
+    if (url !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 60000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('#character-form')[0].reset();
+
+                if (data.error == undefined) {
+                    Swal.fire({
+                            type: 'success',
+                            title: data.success,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#character-modal').modal('hide');
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: data.error,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
+});
+
+//Delete image
 $(document).on('click', '.delete-images', function () {
     let id = $(this).attr("id");
+    let charaId = $(this).val()
 
     Swal.fire({
         title: 'Are you sure?',
@@ -82,18 +171,26 @@ $(document).on('click', '.delete-images', function () {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
             $.ajax({
                 url: "characters-images/" + id,
                 type: 'DELETE',
                 success: function () {
+
                     Swal.fire(
                             'Deleted!',
                             'Images successfully deleted.',
                             'success'
                         )
                         .then(function () {
-                            dataTable.ajax.reload();
-                            indexImages(id)
+                            indexImages(charaId)
                         });
                 }
             });
@@ -101,6 +198,7 @@ $(document).on('click', '.delete-images', function () {
     })
 });
 
+// Delete character
 $('#character-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
 
@@ -114,20 +212,28 @@ $('#character-table tbody').on('click', '.delete', function () {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            // $.ajax({
-            //     url: "lecturers/" + id,
-            //     type: 'DELETE',
-            //     success: function () {
-            Swal.fire(
-                    'Deleted Id ' + id + '!',
-                    'Visual novel has been turned off',
-                    'success'
-                )
-                .then(function () {
-                    dataTable.ajax.reload();
-                });
-            //     }
-            // });
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            $.ajax({
+                url: "characters/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted.',
+                            'Character successfully deleted!',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
         }
     })
 });
