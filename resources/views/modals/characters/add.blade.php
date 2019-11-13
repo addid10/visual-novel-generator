@@ -31,12 +31,13 @@
                     </div>
                     <div class="form-group">
                             <label for="images">Images</label>
-                            <input type="file" class="form-control-file" id="images" name="image[]" multiple>
+                            <input type="file" class="form-control-file" id="images" name="images[]" multiple>
                         </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="character-id">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="character-action">Save</button>
+                    <button type="submit" class="btn btn-primary" id="character-action">Save</button>
                 </div>
             </form>
         </div>
