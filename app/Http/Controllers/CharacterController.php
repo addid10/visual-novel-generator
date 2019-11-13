@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Character;
+use App\CharacterImage;
+use App\Helpers\UploadHelper;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CharacterController extends Controller
 {
@@ -16,34 +20,49 @@ class CharacterController extends Controller
         
     public function store(Request $request)
     {
-        try {
+        // try {
             $validator = Validator::make($request->all(), [
-                'fullname' => 'required|string|unique:characters,fullname',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
             if($validator->fails()) {
                 return response()->json([
-                    'error' => "The title has already been taken!"
+                    'error' => "The file must be an image with type: jpeg, png, jpg, gif!"
                 ]);
             }
-
-            Character::create([
-                'fullname' => $request->title,
-                'nickname' => $request->synopsis,
-                'synopsis' => $request->synopsis,
-                'gender' => $request->synopsis,
-                'description' => $request->synopsis
+            
+            $character = Character::create([
+                'fullname' => $request->fullname,
+                'nickname' => $request->nickname,
+                'gender' => $request->sex,
+                'description' => $request->description
             ]);
+
+            
+            if ($request->hasFile('images')) {
+                $images = [];
+
+                foreach($request->file('images') as $image) {
+                    $imageName = UploadHelper::uploadImage(
+                        $image, 
+                        $request->nickname,
+                        'characters'
+                    );
+
+                    $images[] = ['image' => $imageName, 'character_id' => $character->id];
+                }
+                CharacterImage::insert($images);
+            }
             
             return response()->json([
                 'success' => "Data added successfully!"
             ]);
        
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => "Failed data execution!"
-            ]);
-        }
+        // } catch (\Throwable $th) {
+        //     return response()->json([
+        //         'error' => "Failed data execution!"
+        //     ]);
+        // }
 
     }
     
@@ -61,12 +80,26 @@ class CharacterController extends Controller
             $character = Character::findOrFail($id);
 
             $character->update([
-                'fullname' => $request->title,
-                'nickname' => $request->synopsis,
-                'synopsis' => $request->synopsis,
-                'gender' => $request->synopsis,
-                'description' => $request->synopsis
+                'fullname' => $request->fullname,
+                'nickname' => $request->nickname,
+                'gender' => $request->sex,
+                'description' => $request->description
             ]);
+
+            if ($request->hasFile('images')) {
+                $images = [];
+
+                foreach($request->file('images') as $image) {
+                    $imageName = UploadHelper::uploadImage(
+                        $image, 
+                        $request->nickname,
+                        'characters'
+                    );
+
+                    $images[] = ['image' => $imageName, 'character_id' => $id];
+                }
+                CharacterImage::insert($images);
+            }
             
             return response()->json([
                 'success' => "Data updated successfully!"
@@ -83,7 +116,11 @@ class CharacterController extends Controller
 
     public function destroy($id)
     {
-        $character = Character::findOrFail($id);
+        $character = Character::with('characters_images')->findOrFail($id);
+
+        foreach($character->characters_images as $image) {
+            UploadHelper::deleteFile($image->image);
+        }
 
         $character->delete();
     }
