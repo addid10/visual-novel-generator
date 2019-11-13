@@ -10,9 +10,9 @@ class Music extends Model
     {
         return $this->belongsToMany(
             'App\VisualNovel', 
-            'music_visual_novel', 
-            'visual_novel_id', 
-            'music_id'
+            'music_visual_novel',
+            'music_id', 
+            'visual_novel_id'
         );
     }
     

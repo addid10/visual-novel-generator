@@ -12,8 +12,8 @@ class Background extends Model
         return $this->belongsToMany(
             'App\VisualNovel', 
             'background_visual_novel', 
-            'visual_novel_id', 
-            'background_id'
+            'background_id',
+            'visual_novel_id'
         );
     }
     
