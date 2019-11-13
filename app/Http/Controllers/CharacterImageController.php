@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\CharacterImage;
+use App\Helpers\UploadHelper;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +34,8 @@ class CharacterImageController extends Controller
     public function destroy($id)
     {
         $characterImage = CharacterImage::findOrFail($id);
+    
+        UploadHelper::deleteFile($characterImage->image);
 
         $characterImage->delete();
     }
