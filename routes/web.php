@@ -41,6 +41,12 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
 
     Route::prefix('assets')->group(function () {
         Route::get('/characters', 'CharacterController@index')->name('characters.index');
+        Route::post('/characters', 'CharacterController@store')->name('characters.store');
+        Route::put('/characters/{character}', 'CharacterController@update')->name('characters.update');
+        Route::delete('/characters/{character}', 'CharacterController@destroy')->name('characters.destroy');
+        Route::get('/characters/{character}/edit', 'CharacterController@edit')->name('characters.edit');
+
+
         Route::get('/characters-images', 'CharacterImageController@index')->name('characters-images.index');   
         Route::get('/characters-images/{characterImages}', 'CharacterImageController@show')->name('characters-images.show');   
         Route::delete('/characters-images/{characterImages}', 'CharacterImageController@destroy')->name('characters-images.destroy');   
