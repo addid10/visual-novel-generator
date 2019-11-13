@@ -53,7 +53,19 @@ Route::group([ 'middleware' => ['auth','role:creator']], function () {
 
 
         Route::get('/backgrounds', 'BackgroundController@index')->name('backgrounds.index');
+        Route::post('/backgrounds', 'BackgroundController@store')->name('backgrounds.store');
+        Route::put('/backgrounds/{background}', 'BackgroundController@update')->name('backgrounds.update');
+        Route::delete('/backgrounds/{background}', 'BackgroundController@destroy')->name('backgrounds.destroy');
+        Route::get('/backgrounds/{background}/edit', 'BackgroundController@edit')->name('backgrounds.edit');
+
+        Route::get('/backgrounds/specific', 'BackgroundController@specific')->name('backgrounds.specific');
+        Route::get('/musics/specific', 'MusicController@specific')->name('musics.specific');   
+
         Route::get('/musics', 'MusicController@index')->name('musics.index');   
+        Route::post('/musics', 'MusicController@store')->name('musics.store');
+        Route::put('/musics/{music}', 'MusicController@update')->name('musics.update');
+        Route::delete('/musics/{music}', 'MusicController@destroy')->name('musics.destroy');
+        Route::get('/musics/{music}/edit', 'MusicController@edit')->name('musics.edit');
     });
 });
 
