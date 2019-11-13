@@ -20,7 +20,7 @@ class CharacterController extends Controller
         
     public function store(Request $request)
     {
-        // try {
+        try {
             $validator = Validator::make($request->all(), [
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
@@ -58,11 +58,11 @@ class CharacterController extends Controller
                 'success' => "Data added successfully!"
             ]);
        
-        // } catch (\Throwable $th) {
-        //     return response()->json([
-        //         'error' => "Failed data execution!"
-        //     ]);
-        // }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => "Failed data execution!"
+            ]);
+        }
 
     }
     
