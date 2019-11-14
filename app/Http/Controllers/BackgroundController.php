@@ -118,9 +118,12 @@ class BackgroundController extends Controller
 
     public function destroy($id)
     {
-        $background = Character::findOrFail($id);
+        $background = Background::findOrFail($id);
+        
+        UploadHelper::deleteFile($background->image);
 
         $background->delete();
+        $background->visual_novels()->detach();
     }
 
 }
