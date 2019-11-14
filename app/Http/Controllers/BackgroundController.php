@@ -75,7 +75,7 @@ class BackgroundController extends Controller
     
     public function edit($id)
     {
-        $background = Background::findOrFail($id);
+        $background = Background::with('visual_novels')->findOrFail($id);
 
         return response()->json($background);
     }
