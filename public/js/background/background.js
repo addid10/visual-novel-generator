@@ -65,25 +65,28 @@ $('#background-add').click(function () {
 });
 
 //Fetch datas for update
-// $('#background-table tbody').on('click', '.update', function () {
-//     let id = $(this).attr('id');
+$('#background-table tbody').on('click', '.update', function () {
+    let id = $(this).attr('id');
+    let visualNovels = [];
+    $.ajax({
+        url: "backgrounds/" + id + "/edit",
+        dataType: "json",
+        success: function (result) {
+            $('#background-modal').modal('show');
+            $('#background-title').text("Update background");
+            $('#background-action').text("Update");
 
-//     $.ajax({
-//         url: "backgrounds/" + id + "/edit",
-//         dataType: "json",
-//         success: function (result) {
-//             $('#background-modal').modal('show');
-//             $('#background-title').text("Update background");
-//             $('#background-action').text("Update");
+            result.visual_novels.forEach(function (visualNovel) {
+                visualNovels.push(visualNovel.id);
+            });
 
-//             $('#fullname').val(result.fullname);
-//             $('#nickname').val(result.nickname);
-//             $('#sex').val(result.gender);
-//             $('#description').val(result.description);
-//             $('#background-id').val(result.id);
-//         }
-//     })
-// });
+
+            $('#name').val(result.name);
+            $('#visual-novels').val(visualNovels);
+            $('#background-id').val(result.id);
+        }
+    })
+});
 
 // Store
 $(document).on('submit', '#background-form', function (e) {
