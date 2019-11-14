@@ -86,13 +86,22 @@ class BackgroundController extends Controller
         try {
             $background = Background::findOrFail($id);
 
-            $background->update([
-                'fullname' => $request->title,
-                'nickname' => $request->synopsis,
-                'synopsis' => $request->synopsis,
-                'gender' => $request->synopsis,
-                'description' => $request->synopsis
-            ]);
+            $background->name = $request->name;
+
+            if ($request->hasFile('image')) {
+                UploadHelper::deleteFile($background->image);
+
+                $imageName = UploadHelper::uploadImage(
+                    $request->file('image'), 
+                    $request->name,
+                    'backgrounds'
+                );
+
+                $background->image = $imageName;
+            }
+
+            $background->save();
+            $background->visual_novels()->sync($request->visual_novels);
             
             return response()->json([
                 'success' => "Data updated successfully!"
