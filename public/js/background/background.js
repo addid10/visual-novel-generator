@@ -62,6 +62,7 @@ $('#background-add').click(function () {
     $('#background-form')[0].reset();
     $('#background-title').text("Add background");
     $('#background-action').text("Add");
+    $('#image').attr('required', '');
 });
 
 //Fetch datas for update
@@ -84,6 +85,7 @@ $('#background-table tbody').on('click', '.update', function () {
             $('#name').val(result.name);
             $('#visual-novels').val(visualNovels);
             $('#background-id').val(result.id);
+            $('#image').removeAttr('required');
         }
     })
 });
