@@ -11,9 +11,7 @@ class MusicController extends Controller
 {
     public function index(Request $request)
     {
-        $id = $request->id;
-
-        $musics = VisualNovel::with('musics')->whereId($id)->first(['id']);
+        $musics = Music::get();
 
         return $request->ajax() ? response()->json(['data' => $musics]) : view('musics.index');
     }
