@@ -51,7 +51,7 @@ function indexImages(id) {
             data.forEach(function (result) {
                 let image = '<div class="col-md-6">' +
                     '<div class="image-position">' +
-                    '<img src="../storages/' + result.image + '" class="w-100 mb-5 rounded image-detail" alt="' + result.name + '">' +
+                    '<img src="../storage/' + result.image + '" class="w-100 mb-5 rounded image-detail" alt="' + result.name + '">' +
                     '<button id="' + result.id + '" class="btn btn-danger btn-sm delete-images" value="' + id + '"><span class="mdi mdi-delete"></span></button>' +
                     '</div>' +
                     '</div>';
