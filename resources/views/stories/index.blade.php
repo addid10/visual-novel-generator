@@ -45,13 +45,3 @@
 {{-- Custom Javascript --}}
     <script src="{{ asset('js/stories/stories.js') }}"></script>
 @endsection
-
-{{-- 
-<tr>
-    <td>GSA Visual Novel</td>
-    <td>Rerezditya</td>
-    <td>
-        <button type="button" class="btn btn-md btn-gradient-primary w-100" data-toggle="modal"
-            data-target="#stories-modal">Stories</button>
-    </td>
-</tr> --}}
