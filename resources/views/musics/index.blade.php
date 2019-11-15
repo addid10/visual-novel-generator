@@ -46,7 +46,6 @@
 {{-- Datatable  --}}
 <script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/vendors/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap/bootstrap-select.js') }}"></script>
 
 {{-- Custom JS --}}
 <script src="{{ asset('js/music/music.js') }}"></script>
