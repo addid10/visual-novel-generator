@@ -30,14 +30,16 @@ function nextDialogue(number, callback) {
             number: number
         },
         success: function (data) {
+            console.log(data);
             if (data.id !== undefined) {
                 $('#story-id').val(data.id);
 
-                audio = audios[data.music.name];
+                if (data.music !== null) {
+                    audio = audios[data.music.name];
+                    isPlaying(audio);
 
-                isPlaying(audio);
-
-                audios[data.music.name].play();
+                    audios[data.music.name].play();
+                }
 
                 if (playing == false) {
                     playing = true;
@@ -45,19 +47,29 @@ function nextDialogue(number, callback) {
                     playing = false;
                 }
 
-                if (background !== data.background.image) {
-                    $('.background').css('background-image', 'url(../../storage/' + data.background.image + ')');
-                    background = data.background.image;
+                if (data.background !== null) {
+                    if (background !== data.background.image) {
+                        $('.background').css('background-image', 'url(../../storage/' + data.background.image + ')');
+                        background = data.background.image;
+                    }
                 }
 
-                if (characterName !== data.character_image.character.nickname) {
-                    $('#character-name').html('<span class="animated jackInTheBox delay-2s">' + data.character_image.character.nickname + '</span>');
-                    characterName = data.character_image.character.nickname;
+                if (data.character_image !== null) {
+                    if (characterName !== data.character_image.character.nickname) {
+                        $('#character-name').html('<span class="animated jackInTheBox delay-2s">' + data.character_image.character.nickname + '</span>');
+                        characterName = data.character_image.character.nickname;
+                    }
+                } else {
+                    $('#character-name').html('');
                 }
 
-                if (characterImage !== data.character_image.image) {
-                    $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storage/' + data.character_image.image + '"> ');
-                    characterImage = data.character_image.image;
+                if (data.character_image !== null) {
+                    if (characterImage !== data.character_image.image) {
+                        $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storage/' + data.character_image.image + '"> ');
+                        characterImage = data.character_image.image;
+                    }
+                } else {
+                    $('#character-faceclaim').html('');
                 }
 
                 $('#dialogue').text(data.dialogue);
