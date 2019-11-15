@@ -19,7 +19,7 @@ let dataTable = $('#music-table').DataTable({
             "render": function (data, type, full, meta) {
                 let music = full.music;
                 let name = full.name;
-                return '<audio preload="auto" src="../storages/' + music + '" id="' + name + '"></audio>' +
+                return '<audio preload="auto" src="../storage/' + music + '" id="' + name + '"></audio>' +
                     '<button class="btn btn-icon btn-gradient-danger btn-rounded play-music" value="' + name + '">' +
                     '<span class="mdi mdi-play-circle"></span></button>';
             }
