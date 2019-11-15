@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="music">Music</label>
-                        <input type="file" class="form-control-file" id="music" name="music">
+                        <input type="file" class="form-control-file" id="music" name="music" accept="audio/*">
                     </div>
                     <div class="form-group">
                         <label for="topics">Visual Novels</label>
