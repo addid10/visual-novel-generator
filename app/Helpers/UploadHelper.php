@@ -14,7 +14,7 @@ class UploadHelper
     {
         setlocale(LC_TIME, 'id_ID');
 
-        $path = public_path('storages/');
+        $path = storage_path('app/public/');
 
         $fileName = !is_null($idName) ? $idName . '_' . Carbon::now()->timestamp . '_' . uniqId() : str_random(25);
 
@@ -30,12 +30,12 @@ class UploadHelper
 
     public static function deleteFile($fileName)
     {
-        if (unlink(public_path('storages/').$fileName)) {
+        if (Storage::delete('public/'.$fileName)) {
             return true;
         }
     }
 
-    public static function uploadAudio(UploadedFile $uploadedFile, $idName, $folder)
+    public static function uploadFile(UploadedFile $uploadedFile, $idName, $folder)
     {
         setlocale(LC_TIME, 'id_ID');
 
