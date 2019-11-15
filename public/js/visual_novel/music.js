@@ -15,7 +15,7 @@ $('#visual-novel-table tbody').on('click', '.musics', function () {
                     '<tr>' +
                     '<td>' + data.id + '</td>' +
                     '<td>' + data.name + '</td>' +
-                    '<td><audio preload="auto" src="storages/' + data.music + '" id="' + data.name + '"></audio>' +
+                    '<td><audio preload="auto" src="storage/' + data.music + '" id="' + data.name + '"></audio>' +
                     '<button class="btn btn-icon btn-gradient-success btn-rounded play-music" id="' + data.name + '">' +
                     '<span class="mdi mdi-play-circle"></span></button></div>' +
                     '</tr>';

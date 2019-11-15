@@ -16,7 +16,7 @@ $('#visual-novel-table tbody').on('click', '.characters', function () {
                 let character =
                     '<tr>' +
                     '<td>' + result.character.fullname + '</td>' +
-                    '<td><div class="character-image-sm"><img src="storages/' + result.character.characters_images[0].image + '"></div>' +
+                    '<td><div class="character-image-sm"><img src="storage/' + result.character.characters_images[0].image + '"></div>' +
                     '<td>' + result.character_role.name + '</td>' +
                     '<td><button id="' + result.id + '" class="btn btn-icon btn-gradient-danger btn-rounded delete">' +
                     '<span class="mdi mdi-close-circle"></span>' +

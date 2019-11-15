@@ -15,7 +15,7 @@ $('#visual-novel-table tbody').on('click', '.backgrounds', function () {
                     '<tr>' +
                     '<td>' + data.id + '</td>' +
                     '<td>' + data.name + '</td>' +
-                    '<td><div class="bg-image-sm"><img src="storages/' + data.image + '"></div>' +
+                    '<td><div class="bg-image-sm"><img src="storage/' + data.image + '"></div>' +
                     '</tr>';
 
                 $('#visual-novel-backgrounds-table tbody').append(background);
