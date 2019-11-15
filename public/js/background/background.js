@@ -18,7 +18,7 @@ let dataTable = $('#background-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let image = full.image;
-                return '<div class="bg-image-sm"><img src="../storages/' + image + '"></div>';
+                return '<div class="bg-image-sm"><img src="../storage/' + image + '"></div>';
             }
         },
         {

@@ -33,15 +33,15 @@
     @foreach($games as $game)
     @if(!$game->musics->isEmpty())
     @foreach ($game->musics as $music)
-    <audio preload="auto" src="{{ asset('storages/'.$music->music) }}" id="{{ $music->name }}" loop></audio>
+    <audio preload="auto" src="{{ asset('storage/'.$music->music) }}" id="{{ $music->name }}" loop></audio>
     @endforeach
     @foreach ($game->backgrounds as $background)
-    <img src="{{ asset('storages/'.$background->image) }}" alt="" srcset="" class="d-none">
+    <img src="{{ asset('storage/'.$background->image) }}" alt="" srcset="" class="d-none">
     @endforeach
     @endif
     @endforeach
     @foreach($charactersImages as $characterImage)
-    <img src="{{ asset('storages/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
+    <img src="{{ asset('storage/'.$characterImage->image) }}" alt="" srcset="" class="d-none">
     @endforeach
     {{-- Asset End --}}
     <section class="save">

@@ -46,7 +46,7 @@ function nextDialogue(number, callback) {
                 }
 
                 if (background !== data.background.image) {
-                    $('.background').css('background-image', 'url(../../storages/' + data.background.image + ')');
+                    $('.background').css('background-image', 'url(../../storage/' + data.background.image + ')');
                     background = data.background.image;
                 }
 
@@ -56,7 +56,7 @@ function nextDialogue(number, callback) {
                 }
 
                 if (characterImage !== data.character_image.image) {
-                    $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storages/' + data.character_image.image + '"> ');
+                    $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storage/' + data.character_image.image + '"> ');
                     characterImage = data.character_image.image;
                 }
 

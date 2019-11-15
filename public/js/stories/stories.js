@@ -40,10 +40,10 @@
              stories.data.forEach(function (result) {
                  let story =
                      '<tr><td>' + result.dialogue_number + '</td>' +
-                     '<td><div class="character-image-sm"><img src="storages/' + result.character_image.image + '" alt="character-image"></div></td>' +
+                     '<td><div class="character-image-sm"><img src="storage/' + result.character_image.image + '" alt="character-image"></div></td>' +
                      '<td>' + result.dialogue + '</td>' +
-                     '<td><div class="bg-image-sm"><img src="storages/' + result.background.image + '" alt="background-image"></div></td>' +
-                     '<td><audio preload="auto" src="storages/' + result.music.music + '" id="' + result.music.name + '"></audio>' +
+                     '<td><div class="bg-image-sm"><img src="storage/' + result.background.image + '" alt="background-image"></div></td>' +
+                     '<td><audio preload="auto" src="storage/' + result.music.music + '" id="' + result.music.name + '"></audio>' +
                      '<button class="btn btn-icon btn-gradient-success btn-rounded play-music" id="' + result.music.name + '">' +
                      '<span class="mdi mdi-play-circle"></span></button></td>' +
                      '<td>' +
