@@ -16,6 +16,14 @@ class UploadHelper
 
         $path = storage_path('app/public/');
 
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path);
+        }
+        
+        if (!File::isDirectory($path . '/' . $folder)) {
+            File::makeDirectory($path . '/' . $folder);
+        }
+
         $fileName = !is_null($idName) ? $idName . '_' . Carbon::now()->timestamp . '_' . uniqId() : str_random(25);
 
         $image = Image::make($uploadedFile)->save($path . '/' . $folder . '/' . $fileName);
