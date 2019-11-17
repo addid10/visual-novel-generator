@@ -25,9 +25,10 @@ table.dataTable th {
 }
 
 .page-item.active .page-link {
-    background-image: -moz-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
-    background-image: -webkit-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
-    background-image: -ms-linear-gradient(0deg, #3c408f 0%, #5b61cf 100%) !important;
+    background-image: -moz-linear-gradient(0deg, #b82a2a 0%, #b41d1d 100%) !important;
+    background-image: -webkit-linear-gradient(0deg, #b82a2a 0%, #b41d1d 100%) !important;
+    background-image: -ms-linear-gradient(0deg, #b82a2a 0%, #b41d1d 100%) !important;
+    border: 1px solid #b41d1d;
 }
 
 .image-detail {
@@ -47,4 +48,17 @@ table.dataTable th {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.purchase-popup .btn.purchase-button,
+.bg-gradient-primary,
+.btn-gradient-primary {
+    background: -moz-linear-gradient(left, #b82a2a 0%, #b41d1d 100%) !important;
+    background: -webkit-linear-gradient(left, #b82a2a 0%, #b41d1d 100%) !important;
+    background: linear-gradient(to right, #b82a2a 0%, #b41d1d 100%) !important;
+}
+
+.sidebar .nav .nav-item.active>.nav-link .menu-title,
+.sidebar .nav .nav-item.active>.nav-link i {
+    color: #b82a2a !important;
 }
