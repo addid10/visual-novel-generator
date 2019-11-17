@@ -9,6 +9,7 @@ let audios = [];
 let sceneNumber = parseInt($('#dialogue-number').val());
 let playing = true;
 let audio, characterName, characterImage, background;
+let next = true;
 
 // Stop Other Music
 function isPlaying(audelem) {
@@ -23,61 +24,70 @@ function isPlaying(audelem) {
 }
 
 function nextDialogue(number, callback) {
-    $.ajax({
-        type: "GET",
-        url: "next",
-        data: {
-            number: number
-        },
-        success: function (data) {
-            console.log(data);
-            if (data.id !== undefined) {
-                $('#story-id').val(data.id);
+    if (next) {
+        $.ajax({
+            type: "GET",
+            url: "next",
+            data: {
+                number: number
+            },
+            success: function (data) {
+                if (data.id !== undefined) {
+                    $('#story-id').val(data.id);
 
-                if (data.music !== null) {
-                    audio = audios[data.music.name];
-                    isPlaying(audio);
+                    if (data.music !== null) {
+                        audio = audios[data.music.name];
+                        isPlaying(audio);
 
-                    audios[data.music.name].play();
-                }
-
-                if (playing == false) {
-                    playing = true;
-                } else {
-                    playing = false;
-                }
-
-                if (data.background !== null) {
-                    if (background !== data.background.image) {
-                        $('.background').css('background-image', 'url(../../storage/' + data.background.image + ')');
-                        background = data.background.image;
+                        audios[data.music.name].play();
                     }
-                }
 
-                if (data.character_image !== null) {
-                    if (characterName !== data.character_image.character.nickname) {
-                        $('#character-name').html('<span class="animated jackInTheBox delay-2s">' + data.character_image.character.nickname + '</span>');
-                        characterName = data.character_image.character.nickname;
+                    if (playing == false) {
+                        playing = true;
+                    } else {
+                        playing = false;
                     }
-                } else {
-                    $('#character-name').html('');
-                }
 
-                if (data.character_image !== null) {
-                    if (characterImage !== data.character_image.image) {
-                        $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storage/' + data.character_image.image + '"> ');
-                        characterImage = data.character_image.image;
+                    if (data.background !== null) {
+                        if (background !== data.background.image) {
+                            $('.background').css('background-image', 'url(../../storage/' + data.background.image + ')');
+                            background = data.background.image;
+                        }
                     }
+
+                    if (data.character_image !== null) {
+                        if (characterName !== data.character_image.character.nickname) {
+                            $('#character-name').html('<span class="animated jackInTheBox delay-2s">' + data.character_image.character.nickname + '</span>');
+                            characterName = data.character_image.character.nickname;
+                        }
+                    } else {
+                        $('#character-name').html('');
+                    }
+
+                    if (data.character_image !== null) {
+                        if (characterImage !== data.character_image.image) {
+                            $('#character-faceclaim').html('<img class="animated fadeIn delay-2s mx-auto character-faceclaim" src="../../storage/' + data.character_image.image + '"> ');
+                            characterImage = data.character_image.image;
+                        }
+                    } else {
+                        $('#character-faceclaim').html('');
+                    }
+
+                    $('#dialogue').text(data.dialogue);
+                    $('#dialogue-number').text(data.dialogue_number);
+                    callback();
+                    next = true;
                 } else {
                     $('#character-faceclaim').html('');
-                }
+                    $('#character-name').html('Epilogue');
+                    $('#dialogue').text('SELESAI');
 
-                $('#dialogue').text(data.dialogue);
-                $('#dialogue-number').text(data.dialogue_number);
-                callback();
+                    next = false;
+                }
             }
-        }
-    })
+        })
+
+    }
 
 }
 
