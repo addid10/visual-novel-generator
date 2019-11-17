@@ -1,4 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        
+    </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
@@ -8,7 +11,7 @@
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
                     <div class="nav-profile-img">
-                        <img src="{{ Auth::user()->image_profile }}" alt="image">
+                        <img src="{{ asset('storage/users/user.png') }}" alt="image">
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
@@ -18,8 +21,8 @@
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                            <button type="submit" class="dropdown-item" href="">
-                                <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button>
+                        <button type="submit" class="dropdown-item" href="">
+                            <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button>
                     </form>
                 </div>
             </li>
