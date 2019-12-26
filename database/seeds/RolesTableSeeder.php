@@ -27,12 +27,7 @@ class RolesTableSeeder extends Seeder
                     'name' => 'guest star',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'administrator',
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ],
+                ]
             ]);
         }
     }
