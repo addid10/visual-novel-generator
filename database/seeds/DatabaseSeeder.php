@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         factory(App\User::class, 5)->create();
         $this->call(GenresTableSeeder::class);
         $this->call(VisualNovelsTableSeeder::class);
+        $this->call(GenreVisualNovelTableSeeder::class);
         $this->call(CharactersTableSeeder::class);
         $this->call(CharactersImagesTableSeeder::class);
         $this->call(VisualNovelsCharactersTableSeeder::class);
