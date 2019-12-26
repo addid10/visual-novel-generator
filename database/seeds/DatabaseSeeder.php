@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BackgroundVisualNovelTableSeeder::class);
         $this->call(MusicsTableSeeder::class);
         $this->call(MusicVisualNovelTableSeeder::class);
+        $this->call(StoriesTableSeeder::class);
     }
 }
