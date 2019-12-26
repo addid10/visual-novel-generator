@@ -24,6 +24,8 @@ class UsersTableSeeder extends Seeder
                     'image_profile' => null,
                     'remember_token' => Str::random(10),
                     'role_id' =>  1,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ],
             ]);
         }
