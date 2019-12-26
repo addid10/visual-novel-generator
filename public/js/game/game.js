@@ -83,6 +83,13 @@ function nextDialogue(number, callback) {
                     $('#dialogue').text('SELESAI');
 
                     next = false;
+
+                    Swal.fire(
+                        'Info!',
+                        "VN successfully finished or VN don't have stories.<br>" + 
+                        "(Admin) click <a href='../../stories'>this</a> to add story!",
+                        'info'
+                    )
                 }
             }
         })
