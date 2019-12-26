@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CharacterRolesTableSeeder::class);
         $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         factory(App\User::class, 5)->create();
         $this->call(GenresTableSeeder::class);
         $this->call(VisualNovelsTableSeeder::class);
